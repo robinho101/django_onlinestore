@@ -17,22 +17,12 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
-from rest_framework import routers
+from api import urls
 from store.views import *
-
-router_category = routers.DefaultRouter()
-router_category.register(r'category', CategoryViewSet)
-
-router_product = routers.DefaultRouter()
-router_product.register(r'product', ProductViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-drf-auth/', include('rest_framework.urls')),
-    path('category-api-entry/', include(router_category.urls)),
-    path('product-api-entry/', include(router_product.urls)),
-    path('api-auth/', include('djoser.urls')),
-    re_path('auth/', include('djoser.urls.authtoken')),
+    path('', include(urls))
 ]
 
 if settings.DEBUG:
