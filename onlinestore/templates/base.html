@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'store/bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
+    <title>Title</title>
+</head>
+<body>
+<span id="to-top"></span>
+<div class="container-fluid">
+    <header>
+        <div class="top_header">
+            <nav class="header-top-nav-left">
+                <a href="{% url 'main' %}">
+                    <img class="main-logo" src="{% static 'store/img/online-shop-logo.jpg' %}" width="50" height="50">
+                </a>
+            </nav>
+            <div class="search-form-wrapper">
+                <form method="get" role="search">
+                    <div class="search-dropdown">
+                        <span class="search-label">выбрать</span>
+                        <i class="search-dropdown-icon"></i>
+                    </div>
+                    <select class="search-select">
+                        <option selected="selected">категории</option>
+                    </select>
+                    <div class="search-field">
+                        <input type="text" name="" id="item-search-input">
+                    </div>
+                    <div class="search-submit-block">
+                        <img class="arrow-right-submit" src="{% static 'store/img/right-arrow.png' %}" width="45"
+                             height="45">
+                    </div>
+                </form>
+            </div>
+            <nav class="header-top-nav-right">
+                {% if request.user.is_authenticated %}
+                <a style="color:white;" href="#">{{user.username}}</a> <span style="color:white;">|</span> <a style="color:white;" href="{% url 'account_logout' %}">выход</a>
+                {% else %}
+                <div class="register-or-login-wrapper">
+                    <a class="reg-login-link reg" href="{% url 'account_signup' %}">регистрация</a>
+                    /
+                    <a class="reg-login-link login" href="{% url 'account_login' %}">войти</a>
+                </div>
+                {% endif %}
+                <div class="basket">
+                    <a href="">
+                        <img src="{% static 'store/img/basket.png' %}" alt="" width="50" height="50">
+                    </a>
+                </div>
+            </nav>
+        </div>
+        <div class="bottom_header">
+            <div class="burger-wrapper">
+                <input type="checkbox" name="" id="burger">
+                <label class="burger-label" for="burger"></label>
+                <span class="catalog">каталог</span>
+                <nav class="burger-list">
+                    <ul>
+                        {% for item in category %}
+                        <a href="">
+                            <li>{{item}}</li>
+                        </a>
+                        {% endfor %}
+
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </header>
+    <div class="content-container">
+        <div class="background-image-wrapper">
+            {% if messages %}
+
+            {% for message in messages %}
+
+            {% if message.tags == 'error' %}
+
+            <div class="alert alert-danger" role="alert">
+                {{message}}
+            </div>
+
+            {% else %}
+
+            <div class="alert alert-{{ message.tags }}" role="alert">
+                {{ message }}
+            </div>
+
+            {% endif %}
+
+            {% endfor %}
+
+            {% endif %}
+            {% block content %}
+
+            {% endblock content %}
+        </div>
+    </div>
+    <footer>
+        <div class="footer-top">
+            <a class="to-top-link" href="#to-top">наверх</a>
+        </div>
+        <div class="footer-bottom">
+            <a href="{% url 'main' %}">
+                <img class="main-logo-footer" src="{% static 'store/img/online-shop-logo.jpg' %}" width="50"
+                     height="50">
+            </a>
+        </div>
+    </footer>
+</div>
+
+<script src="{% static 'store/bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'store/js/script.js' %}"></script>
+</body>
+</html>

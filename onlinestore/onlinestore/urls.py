@@ -18,11 +18,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include, re_path
 from api import urls
-from store.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(urls))
+    path('base/', include('store.urls')),
+    path('', include(urls)),  # for api
+    path('', include('store.urls')),
+    # path('', include('registerAndLoginApp.urls')),
+    path('accounts/', include('allauth.urls')),
 ]
 
 if settings.DEBUG:

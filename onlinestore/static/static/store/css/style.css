@@ -1,0 +1,31 @@
+.container-fluid {
+padding:0px;
+min-height: 1100px;
+}
+
+header{
+display: flex;
+width:100%;
+padding:5px;
+height:60px;
+}
+
+.custom-styles {
+height:100%;
+width:100%;
+}
+
+.navbar-nav{
+z-index:100;
+}
+
+.header-background {
+position:absolute;
+height:100%;
+width:100%;
+background-color: blue;
+}
+
+.store-logo {
+
+}
