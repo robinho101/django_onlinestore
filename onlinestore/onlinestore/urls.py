@@ -20,13 +20,13 @@ from django.urls import path, include, re_path
 from api import urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('base/', include('store.urls')),
-    path('', include(urls)),  # for api
-    path('', include('store.urls')),
-    # path('', include('registerAndLoginApp.urls')),
-    path('accounts/', include('allauth.urls')),
-]
+                  path('admin/', admin.site.urls),
+                  path('base/', include('store.urls')),
+                  path('', include(urls)),  # for api
+                  path('', include('store.urls')),
+                  path('accounts/', include('allauth.urls')),
+                  path('', include('userEnvironment.urls')),
+              ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

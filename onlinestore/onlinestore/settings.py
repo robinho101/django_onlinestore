@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -39,10 +40,22 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://domain.com",
+    "https://api.domain.com",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+]
+
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://127.0.0.1:8000',
+# ]
+
 ROOT_URLCONF = 'onlinestore.urls'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'corsheaders',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -52,12 +65,12 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'djoser',
     'api.apps.ApiConfig',
-    'registerAndLoginApp.apps.RegisterandloginappConfig',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.github',
+    'userEnvironment.apps.UserenvironmentConfig',
 ]
 
 # allauth
@@ -78,7 +91,8 @@ AUTHENTICATION_BACKENDS = (
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'registerAndLoginApp', 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), os.path.join(BASE_DIR, 'registerAndLoginApp', 'templates'),
+                 os.path.join(BASE_DIR, 'userEnvironment', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,11 +100,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'context_processors.data.category',
             ],
         },
     },
 ]
-
 WSGI_APPLICATION = 'onlinestore.wsgi.application'
 
 # Database
@@ -143,11 +157,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'store')
+    os.path.join(BASE_DIR, 'store/static')
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
-MEDIA_URL = '/images/'
+MEDIA_URL = 'images/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

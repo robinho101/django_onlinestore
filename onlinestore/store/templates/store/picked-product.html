@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+
+<link rel="stylesheet" href="{% static 'store/css/picked_product.css' %}">
+
+{% endblock link %}
+
+{% block content %}
+
+<h1 class="main-title">{{ title }}</h1>
+
+{% for item in product %}
+
+<div class="product-wrapper">
+    <div class="background"></div>
+    <img class="picture" src="{{ item.image.url }}">
+    <div class="desc">
+        <a href="{% url 'product-detail' item.pk %}">
+            <div class="title" style="font-weight:bolder;">{{ item.title }}</div>
+        </a>
+        <div>{{ item.manufacturer }}</div>
+        <div>{{ item.description }}</div>
+    </div>
+    <input class="input_number" type="number" min="1" step="1" value="1">
+    <div class="price">{{ item.price }}
+        <form class="form_product_in_basket_to_model" action="{% url 'product_in_basket_to_model' %}" method="post">
+            {% csrf_token %}
+            <button data-product="{{ item.title }}" data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                    class="in_basket" type="submit">в корзину
+            </button>
+            <button data-product="{{ item.title }}" data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                    class="out_of_basket" type="submit">удалить
+            </button>
+            <div class="containerForAnimation">
+                <div id="fountainG">
+                    <div id="fountainG_1" class="fountainG"></div>
+                    <div id="fountainG_2" class="fountainG"></div>
+                    <div id="fountainG_3" class="fountainG"></div>
+                </div>
+            </div>
+            <button data-product="{{ item.title }}" data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                    class="toUserSelection" type="submit">в избранное
+            </button>
+
+        </form>
+    </div>
+</div>
+
+{% endfor %}
+
+{% endblock content %}
+
+
+{% block script %}
+
+<script type="module" src="{% static 'store/js/pickedProduct.js' %}"></script>
+
+{% endblock script %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'userEnvironment/css/userSelection.css' %}">
+{% endblock link %}
+
+{% block content %}
+<form style="display:none;" class="form_product_in_basket_to_model">
+    {% csrf_token %}
+</form>
+
+<div class="main-wrapper">
+    <h1>
+        Избранное
+        <span class="amountOfProduct">
+{{ amount_of_product.number__sum }}
+        </span>
+    </h1>
+
+    <div class="parent">
+        {% for item in selected_product_list %}
+        <input class="input_number" type="number" min="1" step="1" value="1">
+        <div class="div{{ forloop.counter }} for_all_div">
+            <div class="background-color"></div>
+            <div class="image-wrapper">
+                <img class="picture" src="{{ item.image.url }}">
+            </div>
+            <div class="price-wrapper">{{ item.price_per_item }}</div>
+            <div class="title-wrapper">
+                <div class="title">{{ item }}</div>
+                <span class="three_dots">...</span>
+            </div>
+            <button data-product="{{ item.product }}"
+                    data-price="{{ item.price_per_item }}" data-image="{{ item.image.url }}"
+                    class="in_basket" type="submit">в корзину
+            </button>
+            <button data-product="{{ item.product }}"
+                    data-price="{{ item.price_per_item }}" data-image="{{ item.image.url }}"
+                    class="out_of_basket" type="submit">удалить
+                <img class="cart-icon" src="{% static 'userEnvironment/img/cart.png' %}">
+            </button>
+            <div class="containerForAnimation">
+                <div id="fountainG">
+                    <div id="fountainG_1" class="fountainG"></div>
+                    <div id="fountainG_2" class="fountainG"></div>
+                    <div id="fountainG_3" class="fountainG"></div>
+                </div>
+            </div>
+            <button style="position:relative; left:190px;" data-product="{{ item.product }}"
+                    data-price="{{ item.price_per_item }}" data-image="{{ item.image.url }}"
+                    class="toUserSelection" type="submit">в избранное
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock content %}
+
+{% block script %}
+<script type="module" src="{% static 'userEnvironment/js/userSelection.js' %}"></script>
+{% endblock script %}

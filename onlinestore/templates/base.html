@@ -3,9 +3,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{% static 'store/img/favicon.png' %}" type="image/x-icon">
     <link rel="stylesheet" href="{% static 'store/bootstrap/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'store/css/style.css' %}">
-    <title>Title</title>
+    {% block link %}
+    {% endblock link %}
+    <title>Онлайн магазин</title>
 </head>
 <body>
 <span id="to-top"></span>
@@ -14,7 +17,7 @@
         <div class="top_header">
             <nav class="header-top-nav-left">
                 <a href="{% url 'main' %}">
-                    <img class="main-logo" src="{% static 'store/img/online-shop-logo.jpg' %}" width="50" height="50">
+                    <img class="main-logo" src="{% static 'store/img/shop-logo.png' %}" width="50" height="50">
                 </a>
             </nav>
             <div class="search-form-wrapper">
@@ -24,7 +27,10 @@
                         <i class="search-dropdown-icon"></i>
                     </div>
                     <select class="search-select">
-                        <option selected="selected">категории</option>
+                        <option selected="selected">все категории</option>
+                        {% for item in category %}
+                        <option>{{ item }}</option>
+                        {% endfor %}
                     </select>
                     <div class="search-field">
                         <input type="text" name="" id="item-search-input">
@@ -37,7 +43,24 @@
             </div>
             <nav class="header-top-nav-right">
                 {% if request.user.is_authenticated %}
-                <a style="color:white;" href="#">{{user.username}}</a> <span style="color:white;">|</span> <a style="color:white;" href="{% url 'account_logout' %}">выход</a>
+                <div>
+                    <span class="user" style="color:white;">{{user.username}}</span> <span
+                        style="color:white;">|</span> <a
+                        style="color:white;" href="{% url 'account_logout' %}">выход</a>
+                </div>
+                <a style="color:white; margin:15px;" href="">
+                    заказы
+                </a>
+
+                <a style="color:white; margin:15px;" href="{% url 'toUserSelection' %}">
+                    избранное
+                </a>
+                <span class="span-amount-of-product_in_user_selection"></span>
+                <a style="color:white; margin:15px;" href="{% url 'basket' %}">
+                    корзина
+                </a>
+                <span class="span-amount-of-product"></span>
+
                 {% else %}
                 <div class="register-or-login-wrapper">
                     <a class="reg-login-link reg" href="{% url 'account_signup' %}">регистрация</a>
@@ -45,11 +68,6 @@
                     <a class="reg-login-link login" href="{% url 'account_login' %}">войти</a>
                 </div>
                 {% endif %}
-                <div class="basket">
-                    <a href="">
-                        <img src="{% static 'store/img/basket.png' %}" alt="" width="50" height="50">
-                    </a>
-                </div>
             </nav>
         </div>
         <div class="bottom_header">
@@ -60,7 +78,7 @@
                 <nav class="burger-list">
                     <ul>
                         {% for item in category %}
-                        <a href="">
+                        <a href="{% url 'picked-products' item.pk %}">
                             <li>{{item}}</li>
                         </a>
                         {% endfor %}
@@ -97,7 +115,25 @@
             {% block content %}
 
             {% endblock content %}
+
+            <div class="paginator_wrapper">
+                {% for current_page in page_obj.paginator.page_range %}
+                {% if page_obj.number == current_page %}
+                <li class="page-item active">
+                    <a class="page-link" href="?page={{ current_page }}">{{ current_page }}
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ current_page }}">{{ current_page }}
+                    </a>
+                </li>
+                {% endif %}
+
+                {% endfor %}
+            </div>
         </div>
+
     </div>
     <footer>
         <div class="footer-top">
@@ -105,7 +141,7 @@
         </div>
         <div class="footer-bottom">
             <a href="{% url 'main' %}">
-                <img class="main-logo-footer" src="{% static 'store/img/online-shop-logo.jpg' %}" width="50"
+                <img class="main-logo-footer" src="{% static 'store/img/shop-logo.png' %}" width="250"
                      height="50">
             </a>
         </div>
@@ -113,6 +149,8 @@
 </div>
 
 <script src="{% static 'store/bootstrap/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'store/js/script.js' %}"></script>
+<script type="module" src="{% static 'store/js/script.js' %}"></script>
+{% block script %}
+{% endblock script %}
 </body>
 </html>

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'userEnvironment/css/basket.css' %}">
+{% endblock link %}
+
+{% block content %}
+<form style="display:none;" class="form_product_in_basket_to_model">
+    {% csrf_token %}
+</form>
+<div class="main-wrapper">
+    {% if product_in_basket%}
+    <h1>
+        Корзина
+        <span class="amountOfProduct">
+{{ amount_of_product.number__sum }}
+        </span>
+    </h1>
+
+    <div class="selectAll_wrapper">
+        <input style="cursor:pointer;" type="checkbox" name="" id="selectAll">
+        <label style="cursor:pointer;" for="selectAll">выбрать всё</label>
+        <span class="delete_all_span">удалить выбранное</span>
+    </div>
+
+    <div class="products-wrapper">
+        {% for item in product_in_basket %}
+        <div class="item-wrapper">
+
+            <div class="background-color"></div>
+            <div class="product-checkbox-wrapper">
+                <input type="checkbox" name="" id="item_input">
+            </div>
+            <div class="image-wrapper">
+                <img src="{{ item.image.url }}" height="92" width="92">
+            </div>
+            <div class="title">{{ item }}</div>
+            <div class="btn-wrapper">
+                <button class="toUserSelection" type="submit" data-price="{{ item.price_per_item }}"
+                        data-image="{{ item.image.url }}"
+                        data-product="{{ item.product }}">в избранное
+                </button>
+                <button class="out_of_basket" type="submit" data-product="{{ item.product }}">удалить
+                </button>
+            </div>
+            <div class="price-wrapper">
+                {{ item.price_per_item }}
+            </div>
+            <div class="multiply-wrapper">
+                x
+            </div>
+            <div class="equal-wrapper">||</div>
+            <div class="result-in-item-wrapper"></div>
+            <div class="change_amount-wrapper">
+                <input class="amount-wrapper" min="1" step="1" type="number" value="{{ item.number }}">
+            </div>
+
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="go-to-pay-wrapper">
+        <div class="background-color"></div>
+        <button class="to-pay-btn" type="submit">перейти к оплате</button>
+        <div class="your_basket">товаров в вашей корзине -</div>
+        <div class="overall_price">общая стоимость -</div>
+    </div>
+    {% else %}
+    <h1>
+        Корзина пуста
+        <span class="amountOfProduct">
+{{ amount_of_product.number__sum }}
+        </span>
+    </h1>
+    {% endif %}
+</div>
+{% endblock content %}
+
+
+{% block script %}
+<script type="module" src="{% static 'userEnvironment/js/basket.js' %}"></script>
+{% endblock script %}

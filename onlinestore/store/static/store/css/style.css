@@ -16,6 +16,7 @@ padding:0px;
 header {
 width:100%;
 height: 100px;
+z-index:100;
 }
 
 .top_header {
@@ -31,7 +32,10 @@ background-color: #232F3E;
 }
 
 .main-logo {
-border-radius:25%;
+border-radius:21%;
+width: 10%;
+position: absolute;
+top: 9px;
 }
 
 .header-top-nav-left {
@@ -77,9 +81,11 @@ border-top: 4px solid #666;
 }
 
 .search-select{
-position:absolute;
-left: 80px;
-opacity:0;
+position: absolute;
+left: 10px;
+opacity: 0;
+width: 250px;
+z-index: 5555;
 }
 
 .search-field {
@@ -120,6 +126,11 @@ position:absolute;
 .header-top-nav-right{
 position: relative;
 left: 1100px;
+height: 100%;
+width: 23%;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
 .register-or-login-wrapper {
@@ -131,17 +142,20 @@ color: white;
 text-decoration:none;
 }
 
-
-.basket{
+.span-amount-of-product_in_user_selection {
 position: absolute;
+top: 5px;
+right: 135px;
+font-weight: bolder;
 color: white;
-left: 250px;
-top: -10px;
 }
 
-.basket:hover{
-opacity:.5;
-transition:all .3s ease-in-out;
+.span-amount-of-product {
+position: absolute;
+top: 5px;
+right: 40px;
+font-weight: bolder;
+color: white;
 }
 
 .burger-wrapper {
@@ -159,12 +173,13 @@ height: 25px;
 
 .burger-list {
 position: absolute;
-z-index: 1;
+z-index: 10;
 display:none;
 width:310px;
 background:white;
 border:1px solid #232F3E;
 }
+
 
 .burger-list > ul :hover {
 background:#EAEDED;
@@ -184,10 +199,6 @@ content:'☰';
 
 #burger:checked + label + span + nav {
 display:block;
-}
-
-#burger:checked ~ body {
-background-color: rgba(0,0,0,.8);
 }
 
 .catalog {
@@ -233,9 +244,14 @@ align-items:center;
 background:#EAEDED;
 }
 
+.cards-container> div{
+border-radius:5px;
+width:272px;
+height:403px;
+}
+
 .background-image-wrapper {
 width:95%;
-height:1800px;
 background-image: url('../img/back.png');
 }
 
@@ -396,5 +412,55 @@ color:#ffffff;
 border-radius:20%;
 }
 
-// django classes
+// django messages classes
+.alert-info {
+margin:0px;
+}
+
+.alert-danger{
+margin:0px;
+text-align:center;
+color:white;
+background:crimson;
+}
+
+.alert-success{
+margin:0px;
+text-align:center;
+color:white;
+background:green;
+}
+//
+
+//allauth classes
+
+.errorlist li{
+margin-left: auto;
+margin-right: auto;
+width: 299px;
+background:crimson;
+color:white;
+left: auto;
+}
+
+.errorlist{
+margin-left: auto;
+margin-right: auto;
+width: 299px;
+background:crimson;
+color:white;
+left: auto;
+}
+
+.nonfield{
+margin-left: auto;
+margin-right: auto;
+width: 299px;
+background:crimson;
+color:white;
+left: auto;
+}
+//
+
+
 

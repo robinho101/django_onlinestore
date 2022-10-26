@@ -74,7 +74,7 @@
         </div>
         <div class="card-body">
             <a href="">
-                <img src="{% static 'store/img/clothesjpg.jpg' %}" >
+                <img src="{% static 'store/img/clothesjpg.jpg' %}">
             </a>
         </div>
         <div class="card-footer">
@@ -277,4 +277,9 @@
         </div>
     </div>
 </div>
+
+<form style="display:none" class="form_product_in_basket_to_model" action="{% url 'product_in_basket_to_model' %}"
+      method="post">
+    {% csrf_token %}
+</form>
 {% endblock content %}

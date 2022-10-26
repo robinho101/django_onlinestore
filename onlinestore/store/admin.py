@@ -6,7 +6,7 @@ from .models import Category, Product
 # Register your models here.
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'id')
+    list_display = ('title', 'id', 'urlName')
     list_display_links = ('title', 'id')
     search_fields = ('title',)
 
@@ -18,8 +18,8 @@ class ProductAdmin(admin.ModelAdmin):
                     'category',
                     'category_id')
     list_display_links = ('title',)
-    search_fields = ('title', 'category')
-    list_filter = ('title', 'price')
+    search_fields = ('title', 'category', 'category')
+    list_filter = ('title', 'price', 'category')
 
     # fields = (
     #     'title', 'manufacturer', 'description', 'price', 'get_photo', 'created_at', 'updated_at',

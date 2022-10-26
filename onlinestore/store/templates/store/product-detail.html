@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+
+<link rel="stylesheet" href="{% static 'store/css/product_detail.css' %}">
+
+{% endblock link %}
+{% block content %}
+
+<div class="product-detail-wrapper">
+    {% for item in productDetail %}
+
+    <div class="background"></div>
+    <img class="picture" src="{{ item.image.url }}">
+    <div class="desc">
+        <div class="title" style="font-weight:bolder;">{{ item.title }}</div>
+
+        <div>{{ item.manufacturer }}</div>
+        <div>{{ item.description }}</div>
+    </div>
+    <input class="input_number" type="number" min="1" step="1" value="1">
+    <div class="price">{{ item.price }}
+        <form class="form_product_in_basket_to_model" action="{% url 'product_in_basket_to_model' %}" method="post">
+            {% csrf_token %}
+            <button data-product="{{ item.title }}" data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                    class="in_basket" type="submit">в корзину
+            </button>
+            <button data-product="{{ item.title }}" data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                    class="out_of_basket" type="submit">удалить
+            </button>
+            <div class="containerForAnimation">
+                <div id="fountainG">
+                    <div id="fountainG_1" class="fountainG"></div>
+                    <div id="fountainG_2" class="fountainG"></div>
+                    <div id="fountainG_3" class="fountainG"></div>
+                </div>
+            </div>
+            <button style="position: absolute; width: 93px; top: 130px;
+    left: 50px;" data-product="{{ item.title }}" data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                    class="toUserSelection" type="submit">в избранное
+            </button>
+        </form>
+    </div>
+
+    {% endfor %}
+</div>
+
+<div class="product_list_wrapper">
+    <div class="background"></div>
+    {% for item in productList %}
+    <input style="display:none" class="input_number" type="number" min="1" step="1" value="1">
+    <div class="other-item-card">
+        <div class="title" style="font-weight:bolder;">{{ item.title }}</div>
+        <a href="{% url 'product-detail' item.pk %}">
+            <img class="product_list_wrapper-picture" src="{{ item.image.url }}">
+
+            <div style="font-weight:bolder; font-size:22px;text-align:center;"> {{item.price}}</div>
+            <div class="other-item-card-desc" style="font-size:16px;"> {{item.description}}</div>
+            <span class="three_dots"></span>
+        </a>
+
+        <div>
+            <form class="form_product_in_basket_to_model" action="{% url 'product_in_basket_to_model' %}" method="post">
+                {% csrf_token %}
+                <button style="position:absolute; left:42px;" data-product="{{ item.title }}"
+                        data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                        class="in_basket" type="submit">в корзину
+                </button>
+                <button style="position:absolute; left:42px;" data-product="{{ item.title }}"
+                        data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                        class="out_of_basket" type="submit">удалить
+                </button>
+                <div class="containerForAnimation2">
+                    <div id="fountainGG">
+                        <div id="fountainGG_1" class="fountainG"></div>
+                        <div id="fountainGG_2" class="fountainG"></div>
+                        <div id="fountainGG_3" class="fountainG"></div>
+                    </div>
+                </div>
+                <button style="position:relative; left:40px;" data-product="{{ item.title }}"
+                        data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                        class="toUserSelection" type="submit">в избранное
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+    <img class="right-arw hov" src="{% static 'store/img/right-arrow.jpg' %}">
+    <img class="left-arw hov" src="{% static 'store/img/left-arrow.jpg' %}">
+
+</div>
+
+{% endblock content %}
+{% block script %}
+
+<script type="module" src="{% static 'store/js/productDetailScript.js' %}"></script>
+
+{% endblock script %}

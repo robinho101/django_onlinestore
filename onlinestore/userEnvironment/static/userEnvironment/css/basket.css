@@ -1,0 +1,227 @@
+h1 {
+color:wheat;
+position: absolute;
+left: 45%;
+}
+
+.main-wrapper {
+min-height:1000px;
+display: flex;
+justify-content: space-between;
+width: 90%;
+margin-left: auto;
+margin-right: auto;
+}
+
+.products-wrapper {
+position:relative;
+width: 60%;
+margin-top: 100px;
+}
+
+.go-to-pay-wrapper {
+height:300px;
+display:flex;
+justify-content:center;
+position:relative;
+width: 38%;
+margin-top: 100px;
+}
+
+.amountOfProduct {
+font-size: 16px;
+position: absolute;
+top: 10px;
+color: #fff6e6;
+}
+
+.background-color {
+border-radius:5px;
+position: absolute;
+width: 100%;
+height: 100%;
+background: white;
+opacity: .95;
+}
+
+
+.item-wrapper{
+margin-top:2px;
+margin-bottom:2px;
+position: relative;
+height: 200px;
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.product-checkbox-wrapper {
+position: absolute;
+left: 5px;
+}
+
+.image-wrapper {
+position: absolute;
+left: 50px;
+}
+
+.title {
+position: absolute;
+width: 325px;
+margin-bottom: 20px;
+}
+
+.btn-wrapper {
+position: absolute;
+top: 120px;
+
+}
+
+button{
+width: 76px;
+height: 29px;
+border: none;
+border-radius: 5px;
+background: #FEBD69;
+color:#FFFFFF
+}
+
+button:hover{
+opacity:.8;
+}
+
+.out_of_basket {
+border-radius: 5px;
+background: maroon;
+color: #FFFFFF;
+width: 76px;
+height: 29px;
+}
+
+.toUserSelection{
+width:100px;
+}
+
+.toUserSelectionGreen{
+background:#2ac92a;
+}
+
+.price-wrapper {
+position:absolute;
+right: 120px;
+font-weight: bolder;
+}
+
+.change_amount-wrapper {
+position:absolute;
+right: 5px;
+}
+
+.multiply-wrapper {
+position:absolute;
+right:100px;
+font-size: 17px;
+}
+
+.equal-wrapper {
+position: absolute;
+right: 40px;
+font-size: 15px;
+top: 60px;
+}
+
+.result-in-item-wrapper{
+position: absolute;
+right: 5px;
+font-weight: bolder;
+top: 35px;
+width: 80px;
+display: flex;
+justify-content: center;
+}
+
+.amount-wrapper {
+width:80px;
+}
+
+.selectAll_wrapper {
+position:absolute;
+background:white;
+opacity:.95;
+top: 172px;
+border-radius:5px;
+width: 51.3%;
+padding-left: 5px;
+}
+
+.delete_all_span {
+padding-left:20px;
+color:#F91155;
+}
+
+.delete_all_span:hover {
+text-decoration:underline;
+font-weight:bolder;
+cursor:pointer;
+}
+
+.to-pay-btn {
+margin:15px;
+position:absolute;
+border-radius:5px;
+height:50px;
+width:90%;
+background:#2ac92a;
+color:white;
+font-size:25px;
+}
+
+.your_basket {
+position: absolute;
+margin: 26px;
+left: 0px;
+bottom: 100px;
+font-size: 25px;
+font-weight: bolder;
+}
+
+.overall_price {
+position: absolute;
+margin: 26px;
+left: 0px;
+bottom: 0px;
+font-size: 25px;
+font-weight: bolder;
+}
+
+/* pagination-> */
+
+.paginator_wrapper{
+border-radius: 5px;
+position:relative;
+background: #232F3E;
+width: fit-content;
+display: flex;
+color: #ffffff;
+justify-content: center;
+list-style-type: none;
+margin-left: auto;
+margin-right: auto;
+margin-top: 15px;
+margin-bottom: 15px;
+}
+
+.page-link{
+margin: 10px;
+}
+
+.page-link:hover{
+opacity:.7;
+}
+
+.active {
+font-weight: bolder;
+font-size: 21px;
+}
+
+ /* <- pagination */
