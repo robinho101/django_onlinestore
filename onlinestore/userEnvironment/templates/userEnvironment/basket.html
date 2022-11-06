@@ -10,8 +10,8 @@
     {% csrf_token %}
 </form>
 <div class="main-wrapper">
-    {% if product_in_basket%}
-    <h1>
+    {% if products%}
+    <h1 class="basket-empty">
         Корзина
         <span class="amountOfProduct">
 {{ amount_of_product.number__sum }}
@@ -25,7 +25,7 @@
     </div>
 
     <div class="products-wrapper">
-        {% for item in product_in_basket %}
+        {% for product in products %}
         <div class="item-wrapper">
 
             <div class="background-color"></div>
@@ -33,19 +33,21 @@
                 <input type="checkbox" name="" id="item_input">
             </div>
             <div class="image-wrapper">
-                <img src="{{ item.image.url }}" height="92" width="92">
+                <img src="{{ product.image.url }}" height="92" width="92">
             </div>
-            <div class="title">{{ item }}</div>
+            <a class="links" href="{% url 'product-detail' product.pk %}">
+                <div class="title">{{ product.title }}</div>
+            </a>
             <div class="btn-wrapper">
-                <button class="toUserSelection" type="submit" data-price="{{ item.price_per_item }}"
-                        data-image="{{ item.image.url }}"
-                        data-product="{{ item.product }}">в избранное
+                <button class="toUserSelection" type="submit" data-price="{{ product.price }}"
+                        data-image="{{ product.image.url }}"
+                        data-product="{{ product.title }}">в избранное
                 </button>
-                <button class="out_of_basket" type="submit" data-product="{{ item.product }}">удалить
+                <button class="out_of_basket" type="submit" data-product="{{ product.title }}">удалить
                 </button>
             </div>
             <div class="price-wrapper">
-                {{ item.price_per_item }}
+                {{ product.price }}
             </div>
             <div class="multiply-wrapper">
                 x
@@ -53,7 +55,7 @@
             <div class="equal-wrapper">||</div>
             <div class="result-in-item-wrapper"></div>
             <div class="change_amount-wrapper">
-                <input class="amount-wrapper" min="1" step="1" type="number" value="{{ item.number }}">
+                <input class="amount-wrapper" min="1" step="1" type="number" value="{{ product.number }}">
             </div>
 
         </div>
@@ -62,19 +64,67 @@
 
     <div class="go-to-pay-wrapper">
         <div class="background-color"></div>
-        <button class="to-pay-btn" type="submit">перейти к оплате</button>
+        <a href="" class="to-pay-btn">перейти к платёжной ссылке</a>
         <div class="your_basket">товаров в вашей корзине -</div>
         <div class="overall_price">общая стоимость -</div>
     </div>
     {% else %}
-    <h1>
+    <h1 class="basket-empty">
         Корзина пуста
         <span class="amountOfProduct">
-{{ amount_of_product.number__sum }}
+            {% if amount_of_product.number__sum %}
+            {{ amount_of_product.number__sum }}
+            {% endif %}
         </span>
     </h1>
     {% endif %}
 </div>
+<div class="second-product_list_wrapper">
+    <h2 class="you-saw">Вы смотрели</h2>
+    <div class="background"></div>
+    {% for item in viewed_items_list %}
+
+    <div class="second-other-item-card">
+        <input style="display:none" class="input_number" type="number" min="1" step="1" value="1">
+        <div class="second-other-item-card">
+            <div class="title" style="font-weight:bolder;">{{ item.title }}</div>
+            <a class="second-product_list_wrapper_link" href="{% url 'product-detail' item.pkNum %}">
+                <img class="product_list_wrapper-picture" src="{{ item.image.url }}">
+
+                <div style="font-weight:bolder; font-size:22px;text-align:center;"> {{item.price}}</div>
+                <div class="other-item-card-desc" style="font-size:16px;"> {{item.description}}</div>
+                <span class="three_dots"></span>
+            </a>
+
+            <form class="form_product_in_basket_to_model" action="{% url 'product_in_basket_to_model' %}"
+                  method="post">
+                {% csrf_token %}
+                <button style="position:absolute;" data-product="{{ item.title }}"
+                        data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                        class="in_basket" type="submit">в корзину
+                </button>
+                <button style="position:absolute;" data-product="{{ item.title }}"
+                        data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                        class="out_of_basket out_of_basket2" type="submit">удалить
+                </button>
+                <div class="containerForAnimation2">
+                    <div id="fountainGGG">
+                        <div id="fountainGGG_1" class="fountainG"></div>
+                        <div id="fountainGGG_2" class="fountainG"></div>
+                        <div id="fountainGGG_3" class="fountainG"></div>
+                    </div>
+                </div>
+                <button style="margin-left:82px;" data-product="{{ item.title }}"
+                        data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                        class="toUserSelection" type="submit">в избранное
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
 {% endblock content %}
 
 

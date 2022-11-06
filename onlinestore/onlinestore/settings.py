@@ -38,6 +38,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'store.apps.StoreConfig',
     'rest_framework',
     'rest_framework.authtoken',
@@ -73,6 +75,21 @@ INSTALLED_APPS = [
     'userEnvironment.apps.UserenvironmentConfig',
 ]
 
+# Test card numbers
+# Card number	    Expdate	CVV2	3DSecure	Response type
+# 4444555566661111	 any	 any	  yes	      approve
+# 4444111166665555	 any	 any	  yes	      decline
+# 4444555511116666	 any	 any	  no	      approve
+# 4444111155556666	 any	 any	  no	      decline
+# 5555666644441111	 any	 any	  yes	      approve
+# 6666444455551111	 any	 any	  yes	      approve
+# 4444555566669999	 any	 any	  yes,        frictionless	approve
+# 4444666655559999	 any	 any	  yes,        challenge	approve
+# 4444999966665555	 any	 any	  yes,        frictionless	decline
+# 4444666699995555	 any	 any	  yes,        challenge	decline
+# endtest cards
+
+
 # allauth
 SITE_ID = 1
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
@@ -84,8 +101,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-
-# allauth
+# endallauth
 
 
 TEMPLATES = [
@@ -119,6 +135,13 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'django_cache'),
     }
 }
 
@@ -193,8 +216,12 @@ DJOSER = {
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'robinho094@gmail.com'
-EMAIL_HOST_PASSWORD = 'shfhznowvkkdcduy'  # past the key or password app here
+EMAIL_HOST_PASSWORD = 'oabazcbrxfrymwkt'  # past the key or password app here
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_FROM = 'robinho094@gmail.com'
 DEFAULT_FROM_EMAIL = 'robinho094@gmail.com'
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]

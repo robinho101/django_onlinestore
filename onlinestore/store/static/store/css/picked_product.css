@@ -274,3 +274,13 @@ font-size: 21px;
 }
 
  /* <- pagination */
+
+.form-select {
+width:10%;
+position: absolute;
+position: absolute;
+height: 31px;
+padding: 3px;
+right: 115px;
+top: 128px;
+}

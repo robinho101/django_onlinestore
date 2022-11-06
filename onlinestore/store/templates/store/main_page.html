@@ -10,28 +10,28 @@
         </div>
         <div class="card-body">
             <div>
-                <a href="">
+                <a href="#">
                     <img src="{% static 'store/img/the-last-of-us-2.jpeg' %}" alt="" width="100" height="100">
                     <span>Игры</span>
                 </a>
-                <a href="">
+                <a href="#">
                     <img src="{% static 'store/img/keyboard-present.jpg' %}" alt="" width="100" height="100">
                     <span>Клавиатуры</span>
                 </a>
             </div>
             <div>
-                <a href="">
+                <a href="#">
                     <img src="{% static 'store/img/dualshock5.jpg' %}" alt="" width="100" height="100">
                     <span>геймпады</span>
                 </a>
-                <a href="">
+                <a href="#">
                     <img src="{% static 'store/img/ps5.jpg' %}" alt="" width="100" height="100" alt="">
                     <span>Приставки</span>
                 </a>
             </div>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+
         </div>
     </div>
     <div class="div2">
@@ -42,28 +42,28 @@
         </div>
         <div class="card-body">
             <div>
-                <a href="">
+                <a href="#">
                     <img src="{% static 'store/img/shoes.jpg' %}" width="100" height="100" alt="">
                     <span>Обувь</span>
                 </a>
-                <a href="">
+                <a href="{% url 'picked-products' 2 %}">
                     <img src="{% static 'store/img/auto-items.jpg' %}" width="100" height="100" alt="">
                     <span>Автотовары</span>
                 </a>
             </div>
             <div>
-                <a href="">
+                <a href="{% url 'picked-products' 1 %}">
                     <img src="{% static 'store/img/electronic-gadgets.jpeg' %}" width="100" height="100" alt="">
                     <span>Электроника</span>
                 </a>
-                <a href="">
+                <a href="{% url 'picked-products' 5 %}">
                     <img src="{% static 'store/img/hobby.jpg' %}" width="100" height="100" alt="">
                     <span>Хобби и творчество</span>
                 </a>
             </div>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+
         </div>
     </div>
     <div class="div3">
@@ -73,12 +73,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/clothesjpg.jpg' %}">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="#">перейти</a>
         </div>
     </div>
     <div class="div4">
@@ -88,12 +88,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/tv1.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="#">перейти</a>
         </div>
     </div>
     <div class="div5">
@@ -103,12 +103,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/health-and-care.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="#">перейти</a>
         </div>
     </div>
     <div class="div6">
@@ -118,12 +118,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="{% url 'picked-products' 1 %}">
                 <img src="{% static 'store/img/elec.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="{% url 'picked-products' 1 %}">перейти</a>
         </div>
     </div>
     <div class="div7">
@@ -133,7 +133,7 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/sport.jpg' %}" width="100" height="100">
             </a>
         </div>
@@ -148,12 +148,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/for-children.jpeg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="#">перейти</a>
         </div>
     </div>
     <div class="div9">
@@ -163,12 +163,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="{% url 'picked-products' 10 %}">
                 <img src="{% static 'store/img/smart-watches.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="{% url 'picked-products' 10 %}">перейти</a>
         </div>
     </div>
     <div class="div10">
@@ -178,12 +178,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/forniture.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="#">перейти</a>
         </div>
     </div>
     <div class="div11">
@@ -193,12 +193,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/build.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="#">перейти</a>
         </div>
     </div>
     <div class="div12">
@@ -208,12 +208,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/kithen-items.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="#">перейти</a>
         </div>
     </div>
     <div class="div13">
@@ -223,12 +223,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/books.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="#">перейти</a>
         </div>
     </div>
     <div class="div14">
@@ -238,12 +238,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/cats-n-dogs.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="#">перейти</a>
         </div>
     </div>
     <div class="div15">
@@ -253,12 +253,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="#">
                 <img src="{% static 'store/img/house-chemical.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="#">перейти</a>
         </div>
     </div>
     <div class="div16">
@@ -268,12 +268,12 @@
                 </span>
         </div>
         <div class="card-body">
-            <a href="">
+            <a href="{% url 'picked-products' 17 %}">
                 <img src="{% static 'store/img/turism.jpg' %}" width="100" height="100">
             </a>
         </div>
         <div class="card-footer">
-            <a href="">перейти</a>
+            <a href="{% url 'picked-products' 17 %}">перейти</a>
         </div>
     </div>
 </div>

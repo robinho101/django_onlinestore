@@ -10,8 +10,12 @@
 {% block content %}
 
 <h1 class="main-title">{{ title }}</h1>
-
-{% for item in product %}
+<select class="form-select" aria-label="Default select example">
+    <option selected>Упорядочить</option>
+    <option class="sort_by_price" value="1">цена: по убыванию</option>
+    <option class="sort_by_price" value="2">цена: по возростанию</option>
+</select>
+{% for item in page_obj.object_list %}
 
 <div class="product-wrapper">
     <div class="background"></div>

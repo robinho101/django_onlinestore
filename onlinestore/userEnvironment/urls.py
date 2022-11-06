@@ -10,4 +10,7 @@ urlpatterns = [
          name='toUserSelectionModel'),
     path('toUserSelection/', toUserSelection,
          name='toUserSelection'),
+    path('to-purchased-items-model/', toPurchasedItemsModel, name='toPurchasedItemsModel'),
+    path('buy/<int:overall_price>/', buy, name='buy'),
+    path('purchased-items/', purchasedItems, name='purchasedItems')
 ]

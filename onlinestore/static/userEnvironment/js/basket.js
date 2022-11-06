@@ -1,5 +1,13 @@
 import {toBasket, offBasket, getAmountOfProduct} from '../../../../static/store/js/pickedProduct.js';
 
+document.addEventListener('DOMContentLoaded', (e)=>{
+if(document.querySelector('.second-product_list_wrapper')&& document.querySelector('.basket-empty') &&document.querySelector('.basket-empty').textContent.includes('Корзина пуста')) {
+    document.querySelector('.second-product_list_wrapper').style.top=-840+'px';
+}else {
+    document.querySelector('.second-product_list_wrapper').style.top='';
+};
+});
+
 
 function toUserSelectionModel(){
 if(document.querySelector('.toUserSelection')) {
@@ -12,8 +20,8 @@ if(document.querySelector('.toUserSelection')) {
     elem.classList.remove('toUserSelectionGreen')
     elem.textContent='в избранное';
     } else {
-    elem.classList.add('toUserSelectionGreen')
-    elem.textContent='добавлено'
+    elem.classList.add('toUserSelectionGreen');
+    elem.textContent='добавлено';
     }
     let price = elem.getAttribute("data-price");
     let image = elem.getAttribute("data-image");
@@ -44,7 +52,7 @@ if(document.querySelector('.toUserSelection')) {
         return data.json()
     }).then((data)=>{
         document.querySelector('.span-amount-of-product_in_user_selection').textContent=data.amount_of_product.number__sum;
-    });
+        });
     });
     });
 }
@@ -64,6 +72,8 @@ function counter(){
     price_res+=Number(elem.textContent);
     });
     document.querySelector('.overall_price').textContent = 'общая стоимость - ' + price_res;
+    let overall_price = document.querySelector('.overall_price').textContent.replace(/[^0-9]/g,"");
+    document.querySelector('.to-pay-btn').setAttribute('href','http://127.0.0.1:8000/buy/'+overall_price);
 }
 
 if (document.querySelector('.products-wrapper')) {
@@ -81,12 +91,16 @@ elem.checked = false;
 
 
 window.addEventListener('scroll', (e)=>{
-if(window.pageYOffset>0) {
+if(document.querySelectorAll('.item-wrapper')[document.querySelectorAll('.item-wrapper').length-1].offsetTop <= window.pageYOffset+55){
+document.querySelector('.go-to-pay-wrapper').style.position = 'relative';
+ document.querySelector('.go-to-pay-wrapper').style.width = 514 + 'px';
+} else if(window.pageYOffset>0) {
     document.querySelector('.go-to-pay-wrapper').style.width = 514 + 'px';
     document.querySelector('.go-to-pay-wrapper').style.position = 'fixed';
     document.querySelector('.go-to-pay-wrapper').style.right = 115 + 'px';
 } else {
-document.querySelector('.go-to-pay-wrapper').style.position = 'absolute';
+document.querySelector('.go-to-pay-wrapper').style.right = 0 + 'px';
+document.querySelector('.go-to-pay-wrapper').style.position = 'relative';
  document.querySelector('.go-to-pay-wrapper').style.width = 514 + 'px';
 }
 })
@@ -106,6 +120,7 @@ let handler = (e)=>{
     }
 }
 document.addEventListener('DOMContentLoaded', handler);
+
 function afterDOMContentLoaded(){
 document.querySelectorAll('.amount-wrapper').forEach((elem)=>{
 elem.addEventListener('input', handler)
@@ -123,6 +138,44 @@ document.querySelector('.delete_all_span').addEventListener('click', (e)=>{
     counter()
 })
 
+document.querySelector('.to-pay-btn').addEventListener('click', (e)=>{
+let order_id = String(Math.floor(Math.random() * 1000000));
+document.querySelectorAll('.item-wrapper').forEach(async (elem)=>{
+let url = 'http://127.0.0.1:8000/to-purchased-items-model/';
+let item = {};
+item.order_id = order_id;
+item.title = elem.querySelector('.title').textContent;
+item.price = elem.querySelector('.price-wrapper').textContent;
+item.amount = elem.querySelector('.amount-wrapper').value;
+item.image = elem.querySelector('img').getAttribute('src').slice(7,);
+item.csrf_token = document.querySelector(".form_product_in_basket_to_model")[(name = "csrfmiddlewaretoken")].value;
+let fetchData = {
+method: "POST",
+credentials: "same-origin",
+body: JSON.stringify(item),
+headers: new Headers({
+  "Content-Type": "application/json; charset=UTF-8",
+  "X-CSRFToken": item.csrf_token,
+}),
+};
+await fetch(url, fetchData).then((data)=>{
+if(!data.ok){
+throw Error(data.status);
+} else {
+console.log(data.status)
+for (let item of document.querySelectorAll('.item-wrapper')) {
+    item.querySelector('.out_of_basket').click();
+}
+}
+});
+});
+});
+
+
+
+
+
+
 afterDOMContentLoaded()
 }
 
@@ -130,6 +183,6 @@ toUserSelectionModel()
 
 getAmountOfProduct("http://127.0.0.1:8000/product-in-basket-to-model/", ".span-amount-of-product");
 getAmountOfProduct("http://127.0.0.1:8000/toUserSelectionModel/", ".span-amount-of-product_in_user_selection");
-getAmountOfProduct("http://127.0.0.1:8000/basket/");
+
 
 export {counter, toUserSelectionModel};

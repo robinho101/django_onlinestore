@@ -13,7 +13,7 @@
 <body>
 <span id="to-top"></span>
 <div class="container-fluid">
-    <header>
+    <header style="z-index:1000;">
         <div class="top_header">
             <nav class="header-top-nav-left">
                 <a href="{% url 'main' %}">
@@ -26,12 +26,19 @@
                         <span class="search-label">выбрать</span>
                         <i class="search-dropdown-icon"></i>
                     </div>
+                        {% load cache %}
+                        {% cache 43200 selcategory %}
                     <select class="search-select">
                         <option selected="selected">все категории</option>
+
                         {% for item in category %}
-                        <option>{{ item }}</option>
+                        {{ item.pk }}
+                        <option class="search-label-options">
+                            {{ item }}
+                        </option>
                         {% endfor %}
                     </select>
+                    {% endcache %}
                     <div class="search-field">
                         <input type="text" name="" id="item-search-input">
                     </div>
@@ -48,7 +55,7 @@
                         style="color:white;">|</span> <a
                         style="color:white;" href="{% url 'account_logout' %}">выход</a>
                 </div>
-                <a style="color:white; margin:15px;" href="">
+                <a style="color:white; margin:15px;" href="{% url 'purchasedItems' %}">
                     заказы
                 </a>
 
@@ -72,9 +79,11 @@
         </div>
         <div class="bottom_header">
             <div class="burger-wrapper">
+                {% load cache %}
                 <input type="checkbox" name="" id="burger">
                 <label class="burger-label" for="burger"></label>
                 <span class="catalog">каталог</span>
+                {% cache 43200 burgerCategory %}
                 <nav class="burger-list">
                     <ul>
                         {% for item in category %}
@@ -82,10 +91,9 @@
                             <li>{{item}}</li>
                         </a>
                         {% endfor %}
-
                     </ul>
                 </nav>
-
+                {% endcache %}
             </div>
         </div>
     </header>

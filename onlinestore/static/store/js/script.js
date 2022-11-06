@@ -12,13 +12,14 @@ window.addEventListener('scroll', (e)=>{
 
 function styleChange(selector1, selector2, styleName, styleValue) {
   document.querySelector(selector1).addEventListener("click", (e) => {
+
     let stName = styleName,
       stValue = styleValue;
 
 
     if (stName == "left") {
-      document.querySelector('.left-arw').style['display'] = 'block';
-      document.querySelector('.right-arw').style['display'] = 'block';
+      document.querySelector('.left-arw').style.display = 'block';
+      document.querySelector('.right-arw').style.display = 'block';
       let current = document.querySelector(selector2).style[stName].replace(/\D/g,'');
       let res = -Number(current) - stValue;
       document.querySelectorAll(selector2).forEach((elem, index)=>{
@@ -61,6 +62,48 @@ function styleChange(selector1, selector2, styleName, styleValue) {
     }
   });
 }
+
+document.querySelector('.search-submit-block').addEventListener('click', async (e)=>{
+    let text;
+    if (document.querySelector('#item-search-input').value) {
+        text = document.querySelector('#item-search-input').value
+    } else {
+        return;
+    }
+    let url = 'http://127.0.0.1:8000/search-result/';
+    let selectedCategoryId;
+    let csrf_token = document.querySelector('.form_product_in_basket_to_model')[name="csrfmiddlewaretoken"].value;
+    document.querySelectorAll('option').forEach((elem)=>{
+    if(elem.selected) {
+        if(elem.previousSibling.data.replace(/\D+/g,"")){
+           selectedCategoryId = Number(elem.previousSibling.data.replace(/\D+/g,""));
+        } else {
+            selectedCategoryId='';
+        }
+    }
+    });
+
+    let data = {
+    'selectedCategoryId':selectedCategoryId,
+    'text':text,
+    "csrfmiddlewaretoken":csrf_token
+    }
+    let fetchData = {
+      method: "POST",
+      credentials: "same-origin",
+      body: JSON.stringify(data),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        "X-CSRFToken": csrf_token,
+      }),
+    }
+    await fetch(url, fetchData).then((data)=>{
+        if (!data.ok) {
+          throw Error(data.status);
+        }
+    })
+    location.href='http://127.0.0.1:8000/search-result/';
+});
 
 styleChange(".search-dropdown", ".search-select", "opacity", 1);
 

@@ -80,7 +80,17 @@ margin-top: 10px;
 margin-bottom: 10px;
 }
 
+.other_items_that_category_title {
+position:absolute;
+z-index: 100;
+top: 0px;
+color: coral;
+font-size: 25px;
+font-weight: bolder;
+}
+
 .other-item-card {
+margin-top:20px;
 padding: 5px;
 margin-left: 0px;
 margin-right: 10px;
@@ -89,6 +99,20 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 position:relative;
+height:480px;
+transition:all .3s ease-in-out;
+}
+
+.second-other-item-card {
+padding: 5px;
+margin-left: 0px;
+margin-right: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+position:relative;
+height:480px;
 transition:all .3s ease-in-out;
 }
 
@@ -118,6 +142,7 @@ margin-top: auto;
 margin-bottom: auto;
 }
 
+
 .right-arw {
 opacity:0.5;
 cursor:pointer;
@@ -128,6 +153,8 @@ position: absolute;
 margin-top: auto;
 margin-bottom: auto;
 }
+
+
 
 .hov:hover{
 opacity:1;
@@ -455,4 +482,91 @@ width:100px;
 
 .toUserSelectionGreen{
 background:#2ac92a;
+}
+
+#fountainGG{
+	position:absolute;
+    left: 50%;
+	width:1px;
+	height:25px;
+	margin:auto;
+}
+
+#fountainGGG_1{
+	left:0;
+	animation-delay:0.6s;
+		-o-animation-delay:0.6s;
+		-ms-animation-delay:0.6s;
+		-webkit-animation-delay:0.6s;
+		-moz-animation-delay:0.6s;
+}
+
+#fountainGGG_2{
+	left:9px;
+	animation-delay:0.75s;
+		-o-animation-delay:0.75s;
+		-ms-animation-delay:0.75s;
+		-webkit-animation-delay:0.75s;
+		-moz-animation-delay:0.75s;
+}
+
+#fountainGGG_3{
+	left:18px;
+	animation-delay:0.9s;
+		-o-animation-delay:0.9s;
+		-ms-animation-delay:0.9s;
+		-webkit-animation-delay:0.9s;
+		-moz-animation-delay:0.9s;
+}
+
+.second-product_list_wrapper{
+position:relative;
+display:flex;
+flex-wrap: wrap;
+justify-content:center;
+align-items:center;
+margin-left: auto;
+margin-right: auto;
+margin-bottom:10px;
+width: 90%;
+}
+
+.second-other-item-card {
+flex: 1 0 21%;
+margin-top: 20px;
+}
+
+.second-product_list_wrapper_link{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.you-saw {
+position:absolute;
+top: 3px;
+z-index: 10;
+font-weight: bolder;
+color:coral;
+font-size: 25px;
+}
+
+.add-btn{
+position: absolute;
+left: 45px;
+bottom: 18px;
+}
+
+.remove-btn{
+position: absolute;
+left: 45px;
+bottom: 18px;
+}
+
+
+.select-btn {
+position: absolute;
+left: 125px;
+bottom: 18px;
 }

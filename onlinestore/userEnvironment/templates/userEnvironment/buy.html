@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'userEnvironment/css/buy.css' %}">
+{% endblock link %}
+
+{% block content %}
+<form style="display:none;" class="form_product_in_basket_to_model">
+    {% csrf_token %}
+</form>
+<div class="main-wrapper">
+    <a class="pay-link" href="{{url}}">оплатить - {{overall_price}}</a>
+</div>
+{% endblock content %}

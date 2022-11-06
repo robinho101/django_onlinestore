@@ -14,29 +14,33 @@
     <h1>
         Избранное
         <span class="amountOfProduct">
+            {% if amount_of_product.number__sum %}
 {{ amount_of_product.number__sum }}
+        {% endif %}
         </span>
     </h1>
 
     <div class="parent">
-        {% for item in selected_product_list %}
+        {% for product in products %}
         <input class="input_number" type="number" min="1" step="1" value="1">
         <div class="div{{ forloop.counter }} for_all_div">
             <div class="background-color"></div>
             <div class="image-wrapper">
-                <img class="picture" src="{{ item.image.url }}">
+                <img class="picture" src="{{ product.image.url }}">
             </div>
-            <div class="price-wrapper">{{ item.price_per_item }}</div>
-            <div class="title-wrapper">
-                <div class="title">{{ item }}</div>
-                <span class="three_dots">...</span>
-            </div>
-            <button data-product="{{ item.product }}"
-                    data-price="{{ item.price_per_item }}" data-image="{{ item.image.url }}"
+            <div class="price-wrapper">{{ product.price }}</div>
+            <a href="{% url 'product-detail' product.pk %}">
+                <div class="title-wrapper">
+                    <div class="title">{{ product }}</div>
+                    <span class="three_dots">...</span>
+                </div>
+            </a>
+            <button data-product="{{ product.title }}"
+                    data-price="{{ product.price }}" data-image="{{ product.image.url }}"
                     class="in_basket" type="submit">в корзину
             </button>
-            <button data-product="{{ item.product }}"
-                    data-price="{{ item.price_per_item }}" data-image="{{ item.image.url }}"
+            <button data-product="{{ product.title }}"
+                    data-price="{{ product.price }}" data-image="{{ product.image.url }}"
                     class="out_of_basket" type="submit">удалить
                 <img class="cart-icon" src="{% static 'userEnvironment/img/cart.png' %}">
             </button>
@@ -47,13 +51,14 @@
                     <div id="fountainG_3" class="fountainG"></div>
                 </div>
             </div>
-            <button style="position:relative; left:190px;" data-product="{{ item.product }}"
-                    data-price="{{ item.price_per_item }}" data-image="{{ item.image.url }}"
+            <button style="position:relative; left:190px;" data-product="{{ product.title }}"
+                    data-price="{{ product.price }}" data-image="{{ product.image.url }}"
                     class="toUserSelection" type="submit">в избранное
             </button>
         </div>
         {% endfor %}
     </div>
+
 
 </div>
 

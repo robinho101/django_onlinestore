@@ -48,29 +48,31 @@
 </div>
 
 <div class="product_list_wrapper">
+    <h2 class='other_items_that_category_title'>Другие товары этой категории</h2>
     <div class="background"></div>
     {% for item in productList %}
     <input style="display:none" class="input_number" type="number" min="1" step="1" value="1">
     <div class="other-item-card">
-        <div class="title" style="font-weight:bolder;">{{ item.title }}</div>
-        <a href="{% url 'product-detail' item.pk %}">
-            <img class="product_list_wrapper-picture" src="{{ item.image.url }}">
+        <div >
+            <div class="title" style="font-weight:bolder;">{{ item.title }}</div>
+            <a href="{% url 'product-detail' item.pk %}">
+                <img class="product_list_wrapper-picture" src="{{ item.image.url }}">
 
-            <div style="font-weight:bolder; font-size:22px;text-align:center;"> {{item.price}}</div>
-            <div class="other-item-card-desc" style="font-size:16px;"> {{item.description}}</div>
-            <span class="three_dots"></span>
-        </a>
+                <div style="font-weight:bolder; font-size:22px;text-align:center;"> {{item.price}}</div>
+                <div class="other-item-card-desc" style="font-size:16px;"> {{item.description}}</div>
+                <span class="three_dots"></span>
+            </a>
 
-        <div>
+
             <form class="form_product_in_basket_to_model" action="{% url 'product_in_basket_to_model' %}" method="post">
                 {% csrf_token %}
-                <button style="position:absolute; left:42px;" data-product="{{ item.title }}"
+                <button data-product="{{ item.title }}"
                         data-price="{{ item.price }}" data-image="{{ item.image.url }}"
-                        class="in_basket" type="submit">в корзину
+                        class="in_basket add-btn" type="submit">в корзину
                 </button>
-                <button style="position:absolute; left:42px;" data-product="{{ item.title }}"
+                <button data-product="{{ item.title }}"
                         data-price="{{ item.price }}" data-image="{{ item.image.url }}"
-                        class="out_of_basket" type="submit">удалить
+                        class="out_of_basket remove-btn" type="submit">удалить
                 </button>
                 <div class="containerForAnimation2">
                     <div id="fountainGG">
@@ -79,9 +81,9 @@
                         <div id="fountainGG_3" class="fountainG"></div>
                     </div>
                 </div>
-                <button style="position:relative; left:40px;" data-product="{{ item.title }}"
+                <button data-product="{{ item.title }}"
                         data-price="{{ item.price }}" data-image="{{ item.image.url }}"
-                        class="toUserSelection" type="submit">в избранное
+                        class="toUserSelection select-btn" type="submit">в избранное
                 </button>
             </form>
         </div>
@@ -89,6 +91,51 @@
     {% endfor %}
     <img class="right-arw hov" src="{% static 'store/img/right-arrow.jpg' %}">
     <img class="left-arw hov" src="{% static 'store/img/left-arrow.jpg' %}">
+
+</div>
+
+
+<div class="second-product_list_wrapper">
+    <h2 class="you-saw">Вы смотрели</h2>
+    <div class="background"></div>
+    {% for item in viewed_items_list %}
+    <div class="second-other-item-card">
+        <input style="display:none" class="input_number" type="number" min="1" step="1" value="1">
+        <div class="second-other-item-card">
+            <div class="title" style="font-weight:bolder;">{{ item.title }}</div>
+            <a class="second-product_list_wrapper_link" href="{% url 'product-detail' item.pkNum %}">
+                <img class="product_list_wrapper-picture" src="{{ item.image.url }}">
+
+                <div style="font-weight:bolder; font-size:22px;text-align:center;"> {{item.price}}</div>
+                <div class="other-item-card-desc" style="font-size:16px;"> {{item.description}}</div>
+                <span class="three_dots"></span>
+            </a>
+
+            <form class="form_product_in_basket_to_model" action="{% url 'product_in_basket_to_model' %}" method="post">
+                {% csrf_token %}
+                <button style="position:absolute;" data-product="{{ item.title }}"
+                        data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                        class="in_basket" type="submit">в корзину
+                </button>
+                <button style="position:absolute;" data-product="{{ item.title }}"
+                        data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                        class="out_of_basket" type="submit">удалить
+                </button>
+                <div class="containerForAnimation2">
+                    <div id="fountainGGG">
+                        <div id="fountainGGG_1" class="fountainG"></div>
+                        <div id="fountainGGG_2" class="fountainG"></div>
+                        <div id="fountainGGG_3" class="fountainG"></div>
+                    </div>
+                </div>
+                <button style="margin-left:82px;" data-product="{{ item.title }}"
+                        data-price="{{ item.price }}" data-image="{{ item.image.url }}"
+                        class="toUserSelection" type="submit">в избранное
+                </button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
 
 </div>
 

@@ -1,11 +1,11 @@
 h1 {
 color:wheat;
 position: absolute;
-left: 50%;
+left: 45%;
 }
 
 .main-wrapper {
-min-height:1000px;
+min-height:900px;
 display: flex;
 justify-content: space-between;
 width: 90%;
@@ -65,7 +65,7 @@ position: absolute;
 left: 50px;
 }
 
-.title {
+.links {
 position: absolute;
 width: 325px;
 margin-bottom: 20px;
@@ -83,10 +83,19 @@ height: 29px;
 border: none;
 border-radius: 5px;
 background: #FEBD69;
+color:#FFFFFF
 }
 
 button:hover{
 opacity:.8;
+}
+
+.out_of_basket {
+border-radius: 5px;
+background: maroon;
+color: #FFFFFF;
+width: 76px;
+height: 29px;
 }
 
 .toUserSelection{
@@ -157,6 +166,7 @@ cursor:pointer;
 }
 
 .to-pay-btn {
+text-align:center;
 margin:15px;
 position:absolute;
 border-radius:5px;
@@ -165,6 +175,7 @@ width:90%;
 background:#2ac92a;
 color:white;
 font-size:25px;
+padding: 5px;
 }
 
 .your_basket {
@@ -183,4 +194,208 @@ left: 0px;
 bottom: 0px;
 font-size: 25px;
 font-weight: bolder;
+}
+
+/* pagination-> */
+
+.paginator_wrapper{
+border-radius: 5px;
+position:relative;
+background: #232F3E;
+width: fit-content;
+display: flex;
+color: #ffffff;
+justify-content: center;
+list-style-type: none;
+margin-left: auto;
+margin-right: auto;
+margin-top: 15px;
+margin-bottom: 15px;
+}
+
+.page-link{
+margin: 10px;
+}
+
+.page-link:hover{
+opacity:.7;
+}
+
+.active {
+font-weight: bolder;
+font-size: 21px;
+}
+
+/* <- pagination */
+
+.second-main-wrapper {
+margin-top:20px;
+margin-left:auto;
+margin-right:auto;
+position:relative;
+width:90%;
+}
+
+.second-product_list_wrapper {
+position: relative;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+align-items: center;
+margin-left: auto;
+margin-right: auto;
+margin-bottom: 10px;
+margin-top: 10px;
+width: 90%;
+}
+
+.you-saw {
+    position: absolute;
+    top: 3px;
+    z-index: 10;
+    font-weight: bolder;
+    color: coral;
+    font-size: 25px;
+}
+
+.background {
+    border-radius: 10px;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0.94;
+}
+
+.second-other-item-card {
+flex: 1 0 21%;
+margin-top: 20px;
+padding: 5px;
+margin-left: 0px;
+margin-right: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+position: relative;
+height: 480px;
+transition: all .3s ease-in-out;
+}
+
+.second-product_list_wrapper_link {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+.product_list_wrapper-picture {
+width: 250px;
+height: 250px;
+}
+
+.other-item-card-desc {
+height: 53px;
+overflow: hidden;
+}
+
+.in_basket {
+    width: 76px;
+    height: 29px;
+}
+
+.out_of_basket2 {
+    border: none;
+    border-radius: 5px;
+    background: maroon;
+    color: #FFFFFF;
+    display: none;
+    width: 76px;
+    height: 29px;
+}
+
+.containerForAnimation2 {
+    display: none;
+    width: 260px;
+    position: absolute;
+    right: 10px;
+    top: 381px;
+}
+
+#fountainGGG_1 {
+    left: 0;
+    animation-delay: 0.6s;
+    -o-animation-delay: 0.6s;
+    -ms-animation-delay: 0.6s;
+    -webkit-animation-delay: 0.6s;
+    -moz-animation-delay: 0.6s;
+}
+
+.fountainG {
+    position: absolute;
+    top: 0;
+    background-color: rgb(255,255,255);
+    width: 5px;
+    height: 5px;
+    animation-name: bounce_fountainG;
+    -o-animation-name: bounce_fountainG;
+    -ms-animation-name: bounce_fountainG;
+    -webkit-animation-name: bounce_fountainG;
+    -moz-animation-name: bounce_fountainG;
+    animation-duration: 1.5s;
+    -o-animation-duration: 1.5s;
+    -ms-animation-duration: 1.5s;
+    -webkit-animation-duration: 1.5s;
+    -moz-animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    -o-animation-iteration-count: infinite;
+    -ms-animation-iteration-count: infinite;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-iteration-count: infinite;
+    animation-direction: normal;
+    -o-animation-direction: normal;
+    -ms-animation-direction: normal;
+    -webkit-animation-direction: normal;
+    -moz-animation-direction: normal;
+    transform: scale(.3);
+    -o-transform: scale(.3);
+    -ms-transform: scale(.3);
+    -webkit-transform: scale(.3);
+    -moz-transform: scale(.3);
+    border-radius: 19px;
+    -o-border-radius: 19px;
+    -ms-border-radius: 19px;
+    -webkit-border-radius: 19px;
+    -moz-border-radius: 19px;
+}
+
+#fountainGGG_2 {
+    left: 9px;
+    animation-delay: 0.75s;
+    -o-animation-delay: 0.75s;
+    -ms-animation-delay: 0.75s;
+    -webkit-animation-delay: 0.75s;
+    -moz-animation-delay: 0.75s;
+}
+
+#fountainGGG_3 {
+    left: 18px;
+    animation-delay: 0.9s;
+    -o-animation-delay: 0.9s;
+    -ms-animation-delay: 0.9s;
+    -webkit-animation-delay: 0.9s;
+    -moz-animation-delay: 0.9s;
+}
+
+.toUserSelection {
+    width: 100px;
+}
+
+.input_number {
+    width: 40px;
+    height: 30px;
+    position: absolute;
+    right: 173px;
+    top: 203px;
+    z-index: 10;
 }

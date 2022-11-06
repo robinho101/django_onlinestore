@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'userEnvironment/css/purchasedItems.css' %}">
+{% endblock link %}
+
+{% block content %}
+<form style="display:none;" class="form_product_in_basket_to_model">
+    {% csrf_token %}
+</form>
+<div class="main-wrapper">
+    {% if not page_obj.object_list %}
+    <h1>Вы не совершали покупок.</h1>
+    {% else %}
+    <h1>Оплаченные заказы</h1>
+
+    <select class="form-select" aria-label="Default select example">
+        <option selected>Упорядочить</option>
+        <option class="sort_by_price" value="1">дата: по убыванию</option>
+        <option class="sort_by_price" value="2">дата: по возростанию</option>
+    </select>
+    {% for item in page_obj.object_list %}
+
+    <div class="item-wrapper">
+        <div class="background-color"></div>
+        <div class="item-header">
+            <div class="left-header">
+                <span class="data-span">Заказ от {{ item.created_at }}</span>
+                <span class="order-id">УН заказа: {{ item.order_id }}</span>
+            </div>
+            <div class="right-header">
+                <span class="amount">количество: {{ item.amount }}</span>
+                <span class="price">цена за штуку: {{ item.price }}</span>
+            </div>
+        </div>
+        <hr>
+        <div class="item-body">
+            <div class="left-body">
+                <a href="{% url 'product-detail' item.pkNum %}" class="item-title">{{ item.title }}</a>
+            </div>
+            <a href="{% url 'product-detail' item.pkNum %}">
+                <div class="right-body">
+                    <img class="order-pic" src="{{ item.image.url }}" alt="">
+                </div>
+            </a>
+        </div>
+    </div>
+
+    {% endfor %}
+    {% endif %}
+</div>
+{% endblock content %}
+
+{% block script %}
+
+<script type="module" src="{% static 'userEnvironment/js/purchasedItems.js' %}"></script>
+
+{% endblock script %}

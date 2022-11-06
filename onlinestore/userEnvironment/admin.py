@@ -35,5 +35,21 @@ class UserSelectionAdmin(admin.ModelAdmin):
     get_photo.short_description = 'миниатюра'
 
 
+class PurchasedItemsModelAdmin(admin.ModelAdmin):
+    list_display = (
+        'id', 'user', 'order_id', 'title', 'price', 'amount', 'get_photo', 'created_at', 'updated_at', 'sort_by')
+    list_display_links = ('id', 'order_id', 'user', 'title', 'price')
+    search_fields = ('user', 'title', 'order_id')
+    list_filter = ('user', 'title', 'order_id')
+
+    def get_photo(self, obj):
+        if obj.image:
+            return mark_safe(f'<img src="{obj.image.url}" width="75">')
+        return 'изображение отсутствует'
+
+    get_photo.short_description = 'миниатюра'
+
+
 admin.site.register(ProductInBasket, ProductInBasketAdmin)
 admin.site.register(UserSelection, UserSelectionAdmin)
+admin.site.register(PurchasedItemsModel, PurchasedItemsModelAdmin)

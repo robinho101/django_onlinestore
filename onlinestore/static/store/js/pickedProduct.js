@@ -2,7 +2,6 @@ import {counter, toUserSelectionModel} from '../../../../static/userEnvironment/
 
 function getAmountOfProduct(urlAdrs, classSelector) {
   document.addEventListener("DOMContentLoaded", async (e) => {
-
     let url = urlAdrs;
     try{
     let user = document.querySelector(".user").textContent;
@@ -10,7 +9,6 @@ function getAmountOfProduct(urlAdrs, classSelector) {
     let csrf_token = document.querySelector('.form_product_in_basket_to_model')[name="csrfmiddlewaretoken"].value;
     let data = {
       "user": user,
-      empty: "empty",
       "csrfmiddlewaretoken":csrf_token
     };
     let fetchData = {
@@ -34,11 +32,11 @@ function getAmountOfProduct(urlAdrs, classSelector) {
         data.products_in_user_selection.forEach((elem)=>{
           for (let item of document.querySelectorAll('.title')) {
           if (elem.includes(item.textContent)) {
-            item.offsetParent.offsetParent.querySelector('.toUserSelection').style.backgroundColor = '#2ac92a';
+            item.offsetParent.offsetParent.querySelector('.toUserSelection').classList.add('toUserSelectionGreen');
             item.offsetParent.offsetParent.querySelector('.toUserSelection').textContent= 'добавлено';
           }
           if (elem.includes(item.textContent) && item.offsetParent.querySelector('.toUserSelection')) {
-            item.offsetParent.querySelector('.toUserSelection').style.backgroundColor = '#2ac92a';
+            item.offsetParent.querySelector('.toUserSelection').classList.add('toUserSelectionGreen')
             item.offsetParent.querySelector('.toUserSelection').textContent= 'добавлено';
           }
           }
@@ -93,7 +91,6 @@ document.querySelectorAll(".in_basket").forEach((elem) => {
       "image": image,
       "csrfmiddlewaretoken":csrf_token
     };
-    console.log(data);
     let fetchData = {
       method: "POST",
       credentials: "same-origin",
@@ -109,7 +106,6 @@ document.querySelectorAll(".in_basket").forEach((elem) => {
       }
       return data.json();
     }).then(data=>{
-        console.log(data.amount_of_product.number__sum)
         document.querySelector('.span-amount-of-product').textContent=data.amount_of_product.number__sum;
     });
     elem.style.display = 'none';
@@ -149,7 +145,6 @@ function offBasket() {
         "product": product,
         "csrfmiddlewaretoken": csrf_token,
       };
-      console.log(data);
       let fetchData = {
         method: "POST",
         credentials: "same-origin",
