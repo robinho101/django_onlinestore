@@ -174,7 +174,7 @@ height: 25px;
 .burger-list {
 border-radius: 5px;
 position: absolute;
-z-index: 100;
+z-index: 200;
 display:none;
 width:310px;
 background:white;

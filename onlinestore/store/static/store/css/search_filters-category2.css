@@ -1,0 +1,128 @@
+.price_filter_min{
+position:absolute;
+-webkit-appearance:none;
+background: transparent;
+}
+
+.price_filter_max{
+position:absolute;
+-webkit-appearance:none;
+background: transparent;
+height:0px;
+}
+
+.input-min-price {
+width: 107px;
+border-radius: 5px;
+margin-left: 20px;
+}
+
+.input-max-price{
+width: 107px;
+border-radius: 5px;
+margin-left: 20px;
+margin-top: 3px;
+}
+
+.cat28{
+position: relative;
+top: -249px;
+}
+
+.cat212 {
+position: relative;
+top: -337px;
+}
+
+.cat214 {
+position: relative;
+top: -370px;
+}
+
+.cat213 {
+position: relative;
+top: -294px;
+}
+
+.cat23 {
+position: relative;
+top: -4px;
+}
+
+.cat24 {
+position: relative;
+top: 142px;
+}
+
+.cat21{
+position: relative;
+top: 169px;
+}
+
+.cat26 {
+position: relative;
+top: -10px;
+}
+
+.cat27 {
+position: relative;
+top: -16px;
+}
+
+.cat29{
+position: relative;
+top: -147px;
+}
+
+.cat216 {
+display:none;
+}
+
+.cat219 {
+display:none;
+}
+
+.cat220 {
+display:none;
+}
+
+.cat221 {
+display:none;
+}
+
+.cat210 {
+position: relative;
+top: 5px;
+}
+
+.cat211{
+position: relative;
+top: 36px;
+}
+
+.cat222{
+display:none;
+}
+
+.cat223{
+display:none;
+}
+
+.cat25 {
+position: relative;
+top: 220px;
+}
+
+.cat215 {
+position: relative;
+top: -24px;
+}
+
+.cat224 {
+display:none;
+}
+
+.accept_filters{
+position:absolute;
+bottom:8px;
+}

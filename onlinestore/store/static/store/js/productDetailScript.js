@@ -11,7 +11,7 @@ getAmountOfProduct("http://127.0.0.1:8000/product-in-basket-to-model/", ".span-a
 getAmountOfProduct("http://127.0.0.1:8000/toUserSelectionModel/", ".span-amount-of-product_in_user_selection");
 
 function toViewedItemsModel(){
-    document.addEventListener('DOMContentLoaded', async (e)=>{
+    window.addEventListener('load', async (e)=>{
     let url = 'http://127.0.0.1:8000/to-viewed-items-model/';
 
     let title = document.querySelector('.title').textContent;

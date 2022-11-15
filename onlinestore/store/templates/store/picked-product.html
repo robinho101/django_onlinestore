@@ -4,10 +4,16 @@
 {% block link %}
 
 <link rel="stylesheet" href="{% static 'store/css/picked_product.css' %}">
+<link rel="stylesheet" href="{% static 'store/css/search_filters.css' %}">
+<link rel="stylesheet" href="{% static 'store/css/search_filters-category2.css' %}">
 
 {% endblock link %}
 
+
 {% block content %}
+<form class="form_product_in_basket_to_model" action="{% url 'product_in_basket_to_model' %}" method="post">
+    {% csrf_token %}
+</form>
 
 <h1 class="main-title">{{ title }}</h1>
 <select class="form-select" aria-label="Default select example">
@@ -15,6 +21,15 @@
     <option class="sort_by_price" value="1">цена: по убыванию</option>
     <option class="sort_by_price" value="2">цена: по возростанию</option>
 </select>
+
+{% include 'inc/search_filters.html' %}
+
+{% if not page_obj.object_list %}
+
+<h1 style="text-align: center; color: wheat;">Ничего не найдено</h1>
+
+{% else %}
+
 {% for item in page_obj.object_list %}
 
 <div class="product-wrapper">
@@ -54,11 +69,14 @@
 
 {% endfor %}
 
+{% endif %}
+
 {% endblock content %}
 
 
 {% block script %}
 
 <script type="module" src="{% static 'store/js/pickedProduct.js' %}"></script>
+<script type="module" src="{% static 'store/js/search_filters.js' %}"></script>
 
 {% endblock script %}

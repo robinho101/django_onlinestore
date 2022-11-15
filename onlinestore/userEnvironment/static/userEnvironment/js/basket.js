@@ -119,7 +119,7 @@ let handler = (e)=>{
     counter();
     }
 }
-document.addEventListener('DOMContentLoaded', handler);
+window.addEventListener('load', handler);
 
 function afterDOMContentLoaded(){
 document.querySelectorAll('.amount-wrapper').forEach((elem)=>{

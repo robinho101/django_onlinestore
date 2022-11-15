@@ -1,0 +1,230 @@
+.filter_wrapper {
+width: 160px;
+height: 953px;
+position: absolute;
+top: 168px;
+border-radius: 5px;
+left: 55px;
+}
+
+.search_filters_background {
+border-radius: 10px;
+position:absolute;
+width:100%;
+height:100%;
+background:white;
+opacity:0.94;
+}
+
+aside {
+padding:15px;
+z-index: 100;
+position: absolute;
+}
+
+label{
+font-size: 16px;
+}
+
+.filter_wrapper .filter-titles {
+font-weight:bolder;
+display: flex;
+}
+
+.price_filter_name {
+display: block;
+margin-left: 0px;
+font-weight:bolder;
+}
+
+.price_filter_min {
+position:absolute;
+-webkit-appearance:none;
+background: transparent;
+}
+
+.price_filter_max {
+position:absolute;
+-webkit-appearance:none;
+background: transparent;
+height:0px;
+}
+
+.text-field-price {
+position: relative;
+top: 25px;
+}
+
+.input-min-price {
+width: 107px;
+border-radius: 5px;
+margin-left: 20px;
+}
+
+.input-max-price {
+width: 107px;
+border-radius: 5px;
+margin-left: 20px;
+margin-top: 3px;
+}
+
+.ram-wrapper2 {
+position: relative;
+top: -107px;
+}
+
+.ram-wrapper10 {
+position: relative;
+top: -275px;
+}
+
+.ram-wrapper13{
+position: relative;
+top: -335px;
+}
+
+.vram-wrapper3{
+position: relative;
+top: 442px;
+}
+
+.vram-wrapper7{
+position: relative;
+top: 356px;
+}
+
+.vram-wrapper12 {
+position: relative;
+top: 269px;
+}
+
+.ram-wrapper17 {
+position: relative;
+top: -442px;
+}
+
+.ram-wrapper19 {
+position: relative;
+top: -474px;
+}
+
+.brand-of-notebook-wrapper1 {
+position: relative;
+top: 34px;
+}
+
+.brand-of-notebook-wrapper6{
+position: relative;
+top: -81px;
+}
+
+.brand-of-notebook-wrapper15 {
+position: relative;
+top: -276px;
+}
+
+.brand-of-notebook-wrapper16 {
+position: relative;
+top: -281px;
+}
+
+.brand-of-notebook-wrapper22 {
+position: relative;
+top: -308px;
+}
+
+.brand-of-notebook-wrapper24 {
+position: relative;
+top: -448px;
+}
+
+.brand-of-notebook-wrapper25 {
+position: relative;
+top: -453px;
+}
+
+.brand-of-notebook-wrapper26 {
+position: relative;
+top: -458px;
+}
+
+.brand-of-notebook-wrapper27{
+position: relative;
+top: -464px;
+}
+
+.brand-of-notebook-wrapper28 {
+position: relative;
+top: -451px;
+}
+
+.processor-wrapper4 {
+position: relative;
+top: 187px;
+}
+
+.processor-wrapper8 {
+position: relative;
+top: 103px;
+}
+
+.processor-wrapper11 {
+position: relative;
+top: 73px;
+}
+
+.processor-wrapper13 {
+position: relative;
+top: 42px;
+}
+
+.processor-wrapper18 {
+position: relative;
+top: -69px;
+}
+
+.processor-wrapper21 {
+position: relative;
+top: -52px;
+}
+
+.processor-wrapper23 {
+position: relative;
+top: -152px;
+}
+
+.processor-wrapper29 {
+position: relative;
+top: -290px;
+}
+
+.ssd-or-hdd-wrapper5 {
+position: relative;
+top: 483px;
+}
+
+.ssd-or-hdd-wrapper14 {
+position: relative;
+top: 288px;
+}
+
+input, label{
+cursor:pointer;
+}
+
+.max_width {
+position:absolute;
+width: 100%;
+height: 3px;
+border:1px solid gray;
+top: 30px;
+}
+
+.range-wrapper {
+position: relative;
+}
+
+.accept_filters{
+position: absolute;
+    bottom: 72px;
+}

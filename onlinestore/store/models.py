@@ -28,8 +28,17 @@ class Product(models.Model):
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Обновлено')
     category = models.ForeignKey(Category, related_name='product', on_delete=models.CASCADE,
                                  verbose_name='Наименование категории')
+    ram = models.CharField(max_length=250, verbose_name='Оперативная память', default='not')
+    processor = models.CharField(max_length=250, verbose_name='Процессор', default='not')
+    vram = models.CharField(max_length=250, verbose_name='Видеопамять', default='not')
+    hdd_type = models.CharField(max_length=250, verbose_name='Тип жёского диска', default='not')
+    tyre_section_width = models.CharField(max_length=250, verbose_name='Ширина профиля шины', default='not')
+    tyre_section_height = models.CharField(max_length=250, verbose_name='Высота профиля шины', default='not')
+    season = models.CharField(max_length=250, verbose_name='Сезон', default='not')
+    diameter = models.CharField(max_length=250, verbose_name='Диаметр', default='not')
     user = models.ForeignKey(User, verbose_name='Пользователь', on_delete=models.CASCADE)
     sort_by = models.CharField(max_length=250, verbose_name='Упорядочить по', default='not')
+    search_filter = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

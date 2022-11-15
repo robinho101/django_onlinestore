@@ -15,8 +15,9 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('id',
                     'title', 'manufacturer', 'description', 'price', 'in_stock', 'get_photo', 'sort_by', 'created_at',
                     'updated_at',
-                    'category',
-                    'category_id')
+                    'category', 'ram', 'processor', 'vram', 'hdd_type', 'tyre_section_width', 'tyre_section_height',
+                    'season', 'diameter',
+                    'category_id', 'search_filter')
     list_display_links = ('title',)
     search_fields = ('title', 'category', 'category')
     list_filter = ('title', 'price', 'category')

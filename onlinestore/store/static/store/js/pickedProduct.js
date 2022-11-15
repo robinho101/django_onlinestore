@@ -8,7 +8,7 @@ sort_by = '-';
 }else {
 sort_by = '';
 }
-let url = document.location.href
+let url = document.location.href;
 let csrf_token = document.querySelector('.form_product_in_basket_to_model')[name="csrfmiddlewaretoken"].value;
 let data = {
 'sort_by':sort_by,
@@ -31,12 +31,12 @@ if (!data.ok) {
         console.log(data.status)
         }
 })
-location.href=document.location.href;
+location.reload();
 });
 }
 
 function getAmountOfProduct(urlAdrs, classSelector) {
-  document.addEventListener("DOMContentLoaded", async (e) => {
+  window.addEventListener("load", async (e) => {
     let url = urlAdrs;
     try{
     let user = document.querySelector(".user").textContent;

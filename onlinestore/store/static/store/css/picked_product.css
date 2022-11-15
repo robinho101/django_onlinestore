@@ -11,7 +11,7 @@ padding-top:5px;
 padding-bottom:5px;
 margin-left:auto;
 margin-right:auto;
-width:90%;
+width:75%;
 border-bottom:1px solid wheat;
 }
 
@@ -278,9 +278,10 @@ font-size: 21px;
 .form-select {
 width:10%;
 position: absolute;
-position: absolute;
 height: 31px;
 padding: 3px;
-right: 115px;
+right: 228px;
 top: 128px;
 }
+
+

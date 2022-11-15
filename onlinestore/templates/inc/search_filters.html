@@ -1,0 +1,140 @@
+{% if category_id == 1 %}
+
+<div class="filter_wrapper">
+    <div class="search_filters_background"></div>
+    <aside>
+        <div class="range-wrapper common_wrapper">
+            <span class="price_filter_name">Цена</span>
+            <div class="max_width"></div>
+            <input type="range" class="price_filter_min" step="any" min="{{ min.price__min }}"
+                   max="{{ max.price__max }}"
+                   value="{{ min.price__min }}">
+            <input type="range" class="price_filter_max" step="any" min="{{ min.price__min }}"
+                   max="{{ max.price__max }}"
+                   value="{{ max.price__max }}">
+        </div>
+        <div class="text-field-price">
+            <input type="text" min="{{ min.price__min }}" max="{{ max.price__max }}" value="{{ min.price__min }}"
+                   name="" class="input-min-price">
+            <span style="position: absolute; top: 2px;">от</span>
+            <span style="position: absolute; top: 38px;">до</span>
+            <input type="text" min="{{ min.price__min }}" max="{{ max.price__max }}" value="{{ max.price__max }}"
+                   name="" class="input-max-price">
+        </div>
+        <span style="position: relative; top: 30px;" class="filter-titles">Оперативная память</span>
+        <span style="position: relative; top: 577px;" class="filter-titles">Видео память</span>
+        <span style="position: relative; top: 327px;" class="filter-titles">Процессор</span>
+        <span style="position: relative; top: 64px;" class="filter-titles">Брэнд</span>
+        <span style="position: relative; top: 595px;" class="filter-titles">Тип накопителя</span>
+        {% for item in filters_object %}
+
+        {% if item.ram and item.ram != 'not' %}
+        <div class="ram-wrapper common_wrapper ram-wrapper{{ forloop.counter }}">
+            <input data-name="ram__in" data-value="{{ item.ram }}" class="filter-input" type="checkbox"
+                   id="ram{{ forloop.counter }}">
+            <label for="ram{{ forloop.counter }}">{{ item.ram }}</label>
+        </div>
+        {% endif %}
+        {% if item.vram and item.vram != 'not' %}
+        <div class="vram-wrapper common_wrapper vram-wrapper{{ forloop.counter }}">
+            <input data-name="vram__in" data-value="{{ item.vram }}" class="filter-input" type="checkbox"
+                   id="vram{{ forloop.counter }}">
+            <label for="vram{{ forloop.counter }}">{{ item.vram }}</label>
+        </div>
+        {% endif %}
+        {% if item.processor and item.processor != 'not' %}
+        <div class="processor-wrapper common_wrapper processor-wrapper{{ forloop.counter }}">
+            <input data-name="processor__in" data-value="{{ item.processor }}" class="filter-input" type="checkbox"
+                   id="processor{{ forloop.counter }}">
+            <label for="processor{{ forloop.counter }}">{{ item.processor }}</label>
+        </div>
+        {% endif %}
+        {% if item.manufacturer and item.manufacturer != 'not' %}
+        <div class="brand-of-notebook-wrapper common_wrapper brand-of-notebook-wrapper{{ forloop.counter }}">
+            <input data-name="manufacturer__in" data-value="{{ item.manufacturer }}" class="filter-input"
+                   type="checkbox"
+                   id="brand-of-notebook{{ forloop.counter }}">
+            <label for="brand-of-notebook{{ forloop.counter }}">{{ item.manufacturer }}</label>
+        </div>
+        {% endif %}
+        {% if item.hdd_type and item.hdd_type != 'not' %}
+        <div class="ssd-or-hdd-wrapper common_wrapper ssd-or-hdd-wrapper{{ forloop.counter }}">
+            <input data-name="hdd_type__in" data-value="{{ item.hdd_type }}" class="filter-input" type="checkbox"
+                   id="ssd-or-hdd{{ forloop.counter }}">
+            <label for="ssd-or-hdd{{ forloop.counter }}">{{ item.hdd_type }}</label>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <button style="position: absolute; bottom: 70px;" class="accept_filters" type="submit">применить</button>
+    </aside>
+</div>
+
+{% elif category_id == 2 %}
+
+<div class="filter_wrapper">
+    <div class="search_filters_background"></div>
+    <aside>
+        <div class="range-wrapper common_wrapper">
+            <span class="price_filter_name">Цена</span>
+            <div class="max_width"></div>
+            <input type="range" class="price_filter_min" step="any" min="{{ min.price__min }}"
+                   max="{{ max.price__max }}" value="{{ min.price__min }}">
+            <input type="range" class="price_filter_max" step="any" min="{{ min.price__min }}"
+                   max="{{ max.price__max }}" value="{{ max.price__max }}">
+        </div>
+        <div class="text-field-price">
+            <input type="text" value="{{ min.price__min }}" name="" class="input-min-price">
+            <span style="position: absolute; top: 2px;">от</span>
+            <span style="position: absolute; top: 38px;">до</span>
+            <input type="text" value="{{ max.price__max }}" name="" class="input-max-price">
+        </div>
+        <span style="position: relative; top: 30px;" class="filter-titles cat2-tyre_section_width">Ширина профиля</span>
+        <span style="position: relative; top: 113px;"
+              class="filter-titles cat2-tyre_section_height">Высота профиля</span>
+        <span style="position: relative; top:280px;" class="filter-titles cat2-season">Сезон</span>
+        <span style="position: relative; top: 150px;" class="filter-titles cat2-brand">Брэнд</span>
+        <span style="position: relative; top: 307px;" class="filter-titles cat2-diameter">Диаметр</span>
+        {% for item in filters_object %}
+
+        {% if item.ram and item.ram != 'not' %}
+        <div class="ram-wrapper common_wrapper ram-wrapper{{ forloop.counter }} cat2{{ forloop.counter }}">
+            <input data-name="tyre_section_width__in" data-value="{{ item.ram }}" class="filter-input" type="checkbox"
+                   id="cat2-ram{{ forloop.counter }}">
+            <label for="cat2-ram{{ forloop.counter }}">{{ item.ram }}</label>
+        </div>
+        {% endif %}
+        {% if item.vram and item.vram != 'not' %}
+        <div class="vram-wrapper common_wrapper vram-wrapper{{ forloop.counter }} cat2{{ forloop.counter }}">
+            <input data-name="tyre_section_height__in" data-value="{{ item.vram }}" class="filter-input" type="checkbox"
+                   id="cat2-vram{{ forloop.counter }}">
+            <label for="cat2-vram{{ forloop.counter }}">{{ item.vram }}</label>
+        </div>
+        {% endif %}
+        {% if item.processor and item.processor != 'not' %}
+        <div class="processor-wrapper common_wrapper processor-wrapper{{ forloop.counter }} cat2{{ forloop.counter }}">
+            <input data-name="season__in" data-value="{{ item.processor }}" class="filter-input"
+                   type="checkbox"
+                   id="cat2-processor{{ forloop.counter }}">
+            <label for="cat2-processor{{ forloop.counter }}">{{ item.processor }}</label>
+        </div>
+        {% endif %}
+        {% if item.manufacturer and item.manufacturer != 'not' %}
+        <div class="brand-of-notebook-wrapper common_wrapper brand-of-notebook-wrapper{{ forloop.counter }} cat2{{ forloop.counter }}">
+            <input data-name="manufacturer__in" data-value="{{ item.manufacturer }}" class="filter-input" type="checkbox"
+                   id="cat2-brand-of-notebook{{ forloop.counter }}">
+            <label for="cat2-brand-of-notebook{{ forloop.counter }}">{{ item.manufacturer }}</label>
+        </div>
+        {% endif %}
+        {% if item.hdd_type and item.hdd_type != 'not' %}
+        <div class="ssd-or-hdd-wrapper common_wrapper ssd-or-hdd-wrapper{{ forloop.counter }} cat2{{ forloop.counter }}">
+            <input data-name="diameter__in" data-value="{{ item.hdd_type }}" class="filter-input" type="checkbox"
+                   id="cat2-ssd-or-hdd{{ forloop.counter }}">
+            <label for="cat2-ssd-or-hdd{{ forloop.counter }}">{{ item.hdd_type }}</label>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <button class="accept_filters" type="submit">применить</button>
+    </aside>
+</div>
+
+{% endif %}
