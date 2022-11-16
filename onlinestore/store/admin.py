@@ -48,7 +48,7 @@ class ViewedItemsAdmin(admin.ModelAdmin):
 
 
 class SearchQueryAdmin(admin.ModelAdmin):
-    list_display = ('id', 'category', 'description', 'sort_by', 'created_at')
+    list_display = ('id', 'user', 'category', 'description', 'sort_by', 'created_at')
     list_display_links = ('category', 'description')
     search_fields = ('category', 'description')
     list_filter = ('category', 'description')

@@ -102,8 +102,10 @@ document
         : selectedCategoryId;
 
     let data = {
-      selectedCategoryId: selectedCategoryId,
-      text: text,
+      'searchObj': {
+      'category': selectedCategoryId,
+      'description': text,
+      },
       csrfmiddlewaretoken: csrf_token,
     };
     let fetchData = {

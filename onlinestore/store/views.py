@@ -1,10 +1,12 @@
 import json
-from django.db.models import *
-from django.core.paginator import *
+
 from django.core.cache import cache
-from django.shortcuts import render
+from django.core.paginator import *
+from django.db.models import *
 from django.http import JsonResponse
-from django.views.generic import ListView, DetailView, CreateView
+from django.shortcuts import render
+from django.views.generic import ListView
+
 from store.models import *
 
 
@@ -15,42 +17,6 @@ def get_paginate(request, obj, num_of_elem):
     page_num = request.GET.get('page', 1)
     page_objects = paginator.get_page(page_num)
     return page_objects
-
-
-# def search_filter_or_sort_by(request, value, category_id, obj_of_filters):
-#     if value == 'sort_by':
-#         Product.objects.create(user=request.user, category_id=Product.objects.latest('created_at').category_id,
-#                                title=Product.objects.latest('created_at').title,
-#                                manufacturer=Product.objects.latest('created_at').manufacturer,
-#                                description=Product.objects.latest('created_at').description,
-#                                image=Product.objects.latest('created_at').image,
-#                                price=Product.objects.latest('created_at').price, sort_by=obj_of_filters[value],
-#                                ram=Product.objects.latest('created_at').ram,
-#                                processor=Product.objects.latest('created_at').processor,
-#                                vram=Product.objects.latest('created_at').vram,
-#                                hdd_type=Product.objects.latest('created_at').hdd_type,
-#                                tyre_section_width=Product.objects.latest('created_at').tyre_section_width,
-#                                tyre_section_height=Product.objects.latest('created_at').tyre_section_height,
-#                                season=Product.objects.latest('created_at').season,
-#                                diameter=Product.objects.latest('created_at').diameter)
-#         Product.objects.all().order_by('-id')[1].delete()
-#     elif value:
-#         Product.objects.create(user=request.user, category_id=Product.objects.latest('created_at').category_id,
-#                                title=Product.objects.latest('created_at').title,
-#                                manufacturer=Product.objects.latest('created_at').manufacturer,
-#                                description=Product.objects.latest('created_at').description,
-#                                image=Product.objects.latest('created_at').image,
-#                                price=Product.objects.latest('created_at').price,
-#                                ram=Product.objects.latest('created_at').ram,
-#                                processor=Product.objects.latest('created_at').processor,
-#                                vram=Product.objects.latest('created_at').vram,
-#                                hdd_type=Product.objects.latest('created_at').hdd_type,
-#                                tyre_section_width=Product.objects.latest('created_at').tyre_section_width,
-#                                tyre_section_height=Product.objects.latest('created_at').tyre_section_height,
-#                                season=Product.objects.latest('created_at').season,
-#                                diameter=Product.objects.latest('created_at').diameter,
-#                                search_filter=value)
-#         Product.objects.all().order_by('-id')[1].delete()
 
 
 def unique_values(request, category_id):
@@ -97,71 +63,60 @@ def unique_values(request, category_id):
 def searchResult(request):
     if request.body:
         py_dict = json.loads(request.body)
-        if 'sort_by' in py_dict:
-            if py_dict['sort_by']:
-                if SearchQuery.objects.latest('created_at').category:
-                    SearchQuery.objects.create(category=SearchQuery.objects.latest('created_at').category,
-                                               description=SearchQuery.objects.latest('created_at').description,
-                                               sort_by=py_dict['sort_by'])
-                    return JsonResponse('', safe=False)
-                else:
-                    SearchQuery.objects.create(category=SearchQuery.objects.latest('created_at').category,
-                                               description=SearchQuery.objects.latest('created_at').description,
-                                               sort_by=py_dict['sort_by'])
-                    return JsonResponse('', safe=False)
-            else:
-                if SearchQuery.objects.latest('created_at').category:
-                    SearchQuery.objects.create(category=SearchQuery.objects.latest('created_at').category,
-                                               description=SearchQuery.objects.latest('created_at').description,
-                                               sort_by=py_dict['sort_by'])
-                    return JsonResponse('', safe=False)
-                else:
-                    SearchQuery.objects.create(category=SearchQuery.objects.latest('created_at').category,
-                                               description=SearchQuery.objects.latest('created_at').description,
-                                               sort_by=py_dict['sort_by'])
-                    return JsonResponse('', safe=False)
+        if 'searchObj' in py_dict:
+            SearchQuery.objects.create(user=request.user, **py_dict['searchObj'])
+        elif 'sort_by' in py_dict:
+            cache.set('sort_by', py_dict['sort_by'], 10)
 
-        else:
-            SearchQuery.objects.create(category=py_dict['selectedCategoryId'], description=py_dict['text'])
-            return JsonResponse('', safe=False)
+    sort_by = cache.get('sort_by')
+    q_list = Q()
 
-    elif SearchQuery.objects.latest('created_at').category:
-        if not SearchQuery.objects.latest('created_at').sort_by:
-            search_list = Product.objects.filter(category=SearchQuery.objects.latest('created_at').category,
-                                                 description__icontains=SearchQuery.objects.latest(
-                                                     'created_at').description).order_by('price')
+    if sort_by:
+        if SearchQuery.objects.latest('created_at').category:
+            for elem in SearchQuery.objects.latest('created_at').description.split():
+                q_list &= Q(description__icontains=elem)
+
+            search_list = Product.objects.filter(q_list, user=request.user,
+                                                 category=SearchQuery.objects.latest('created_at').category).order_by(
+                sort_by + 'price')
 
             context = {
                 'page_obj': get_paginate(request, search_list, 5)
             }
             return render(request, 'store/searchResult.html', context=context)
-        else:
-            search_list = Product.objects.filter(category=SearchQuery.objects.latest('created_at').category,
-                                                 description__icontains=SearchQuery.objects.latest(
-                                                     'created_at').description).order_by('-price')
 
-            context = {
-                'page_obj': get_paginate(request, search_list, 5)
-            }
-            return render(request, 'store/searchResult.html', context=context)
+        for elem in SearchQuery.objects.latest('created_at').description.split():
+            q_list &= Q(description__icontains=elem)
+
+        search_list = Product.objects.filter(q_list, user=request.user).order_by(sort_by + 'price')
+
+        context = {
+            'page_obj': get_paginate(request, search_list, 5)
+        }
+        return render(request, 'store/searchResult.html', context=context)
 
     else:
-        if not SearchQuery.objects.latest('created_at').sort_by:
-            search_list = Product.objects.filter(
-                description__icontains=SearchQuery.objects.latest('created_at').description).order_by('price')
+        if SearchQuery.objects.latest('created_at').category:
+            for elem in SearchQuery.objects.latest('created_at').description.split():
+                q_list &= Q(description__icontains=elem)
+
+            search_list = Product.objects.filter(q_list, user=request.user,
+                                                 category=SearchQuery.objects.latest('created_at').category)
 
             context = {
                 'page_obj': get_paginate(request, search_list, 5)
             }
             return render(request, 'store/searchResult.html', context=context)
-        else:
-            search_list = Product.objects.filter(
-                description__icontains=SearchQuery.objects.latest('created_at').description).order_by('-price')
 
-            context = {
-                'page_obj': get_paginate(request, search_list, 5)
-            }
-            return render(request, 'store/searchResult.html', context=context)
+        for elem in SearchQuery.objects.latest('created_at').description.split():
+            q_list &= Q(description__icontains=elem)
+
+        search_list = Product.objects.filter(q_list, user=request.user)
+
+        context = {
+            'page_obj': get_paginate(request, search_list, 5)
+        }
+        return render(request, 'store/searchResult.html', context=context)
 
 
 class MainPage(ListView):
@@ -183,28 +138,11 @@ def pickedProduct(request, category_id):
         py_dict = json.loads(request.body)
         if 'search_filter' in py_dict:
             cache.set('search_filter_or_sort_by', py_dict, 10)
-            # search_filter_or_sort_by(request, True, category_id, py_dict)
+
         if 'sort_by' in py_dict:
             cache.set('search_filter_or_sort_by', {'sort_by': py_dict['sort_by']}, 10)
 
     search_filter_or_sort_by = cache.get('search_filter_or_sort_by')
-
-    # search_filter_or_sort_by(request, 'sort_by', 'not', py_dict)
-    # Product.objects.create(user=request.user, category_id=Product.objects.latest('created_at').category_id,
-    #                        title=Product.objects.latest('created_at').title,
-    #                        manufacturer=Product.objects.latest('created_at').manufacturer,
-    #                        description=Product.objects.latest('created_at').description,
-    #                        image=Product.objects.latest('created_at').image,
-    #                        price=Product.objects.latest('created_at').price, sort_by=py_dict['sort_by'],
-    #                        ram=Product.objects.latest('created_at').ram,
-    #                        processor=Product.objects.latest('created_at').processor,
-    #                        vram=Product.objects.latest('created_at').vram,
-    #                        hdd_type=Product.objects.latest('created_at').hdd_type,
-    #                        tyre_section_width=Product.objects.latest('created_at').tyre_section_width,
-    #                        tyre_section_height=Product.objects.latest('created_at').tyre_section_height,
-    #                        season=Product.objects.latest('created_at').season,
-    #                        diameter=Product.objects.latest('created_at').diameter)
-    # Product.objects.all().order_by('-id')[1].delete()
 
     if search_filter_or_sort_by:
         if 'sort_by' in search_filter_or_sort_by:

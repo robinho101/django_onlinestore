@@ -120,7 +120,8 @@
         {% endif %}
         {% if item.manufacturer and item.manufacturer != 'not' %}
         <div class="brand-of-notebook-wrapper common_wrapper brand-of-notebook-wrapper{{ forloop.counter }} cat2{{ forloop.counter }}">
-            <input data-name="manufacturer__in" data-value="{{ item.manufacturer }}" class="filter-input" type="checkbox"
+            <input data-name="manufacturer__in" data-value="{{ item.manufacturer }}" class="filter-input"
+                   type="checkbox"
                    id="cat2-brand-of-notebook{{ forloop.counter }}">
             <label for="cat2-brand-of-notebook{{ forloop.counter }}">{{ item.manufacturer }}</label>
         </div>

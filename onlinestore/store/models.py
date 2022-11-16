@@ -69,6 +69,8 @@ class ViewedItems(models.Model):
 
 
 class SearchQuery(models.Model):
+    user = models.CharField(max_length=15, default='---',
+                            verbose_name='Пользователь')
     category = models.CharField(max_length=250, verbose_name='Категория')
     description = models.TextField(verbose_name='Описание', default='')
     sort_by = models.CharField(max_length=250, verbose_name='Упорядочить по', default='not')
